@@ -8,7 +8,7 @@ import { faPen } from '@fortawesome/free-solid-svg-icons';
 
 const OrderHistoryPage = () => {
   return (
-    <div className="p-4">
+    <div className="p-5">
       <div className="d-flex justify-content-between align-items-center mb-5">
         <h2 className="mb-0">Daftar Riwayat Pemesanan</h2>
       </div>

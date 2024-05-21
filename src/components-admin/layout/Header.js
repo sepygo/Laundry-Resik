@@ -4,7 +4,7 @@ import logo from '../../assets/logo-white.png';
 
 const Header = () => {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="white" expand="lg" className='admin-header-nav border-bottom'>
       <div className="container-fluid">
         <Navbar.Brand href="#home">
           <img src={logo} alt="Logo" className='admin-header-logo'/>

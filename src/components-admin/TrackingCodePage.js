@@ -8,7 +8,7 @@ import { faPen } from '@fortawesome/free-solid-svg-icons';
 
 const TrackingCodePage = () => {
   return (
-    <div className="p-4">
+    <div className="p-5">
       <div className="d-flex justify-content-between align-items-center mb-5">
         <h2 className="mb-0">Kelola Kode Tracking</h2>
         <button className="btn btn-lg btn-primary py-3 px-4">+ Tambah Pesanan</button>
