@@ -1,0 +1,340 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+}
+
+p {
+    font-size: 19px;
+    font-weight: 100;
+}
+
+nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ffffff;
+    z-index: 1000;
+    position: fixed;
+    padding: 10px;
+    width: 100%;
+    box-shadow: 0 10px 10px hsla(0, 1%, 32%, 0.2); 
+}
+
+nav img  {
+    height: 60px;
+    width: 100px;
+}
+
+h1{
+    font-size: 30px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0 40px;
+}
+
+nav li {
+    margin: 0 15px;
+    padding: 0px 10px;
+    font-size: larger;
+}
+
+nav li a{
+    text-decoration: none;
+    color: black;
+}
+
+button{
+    padding: 20px 50px;
+    font-size: larger;
+    background-color: #FFC600;
+    border: none;
+    border-radius: 10px;
+}
+
+
+.header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    background-color: #3A84EF;
+    background-image: url('../assets/background-header.png');
+    background-position: calc(100% + 150px)  ;
+    background-repeat: no-repeat;
+    background-size: 65% ;
+}
+
+.info-header{
+    width: 600px;
+    color: white;
+    font-size: 25px;
+}
+
+.info-header button{
+    padding: 20px 50px;
+    border-radius: 15px;
+    border: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.info-header .lihat{
+    margin-top: 10px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.info-header .pesan{
+    background-color: #FFC600;
+    margin-right: 20px;
+}
+
+
+.info-header  .hubungi{
+    background-color: #3A84EF;
+    border:  3px solid white;
+    color: white;
+    padding: 20px 30px;
+}
+
+.info-header h1{
+    padding-top:  20px;
+    padding-bottom: 20px;
+}
+
+.card-header {
+    height: 380px;
+    width: 500px;
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-header h1 {
+    color: #333; /* Warna teks judul */
+    border-bottom: 3px solid #FFC600;
+    padding-bottom: 10px;
+    margin-bottom: 50px;
+}
+
+.card-header input[type="text"] {
+    width: 100%;
+    padding: 20px;
+    padding-left: 0;
+    margin-bottom: 10px;
+    border: none;
+    border-bottom: 2px dashed rgb(179, 179, 179);
+    margin-bottom: 30px;
+}
+
+.card-header button {
+    background-color: #FFC600;
+    border: none;
+    padding: 20px 50px;
+    border-radius: 15px;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+button:hover ,.pesan:hover,.hubungi:hover{
+    background-color: black;
+    cursor: pointer;
+    color: white; /* Warna latar tombol saat digulirkan */
+}
+
+.card-header p {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.card-header p span {
+    color: #007bff; /* Warna teks untuk tautan 'Hubungi Kami' */
+    cursor: pointer;
+}
+
+.card-header p span:hover {
+    text-decoration: underline; /* Garis bawah saat digulirkan */
+}
+
+.description{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+}
+
+.img-desc{
+    width: 500px;
+    margin-right: 40px
+}
+
+.info-desc{
+    width: 500px;
+}
+
+.info-desc h1,.info-desc p{
+    margin-bottom: 20px;
+}
+
+.layanan{
+    display: flex;
+    color: white;
+    padding: 450px;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 850px;
+    background-color: #3A84EF;
+    background-image: url('../assets/background-layanan.png');
+    background-position: calc(100% - 100%)  ;
+    background-repeat: no-repeat;
+    background-size: 65% ;
+}
+.layanan h1{
+    margin: 20px;
+}
+.layanan h1,.layanan p{
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.cards {
+    width: 1100px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    color: black;
+}
+
+.card {
+    width: 300px;
+    border-radius: 15px; 
+    margin: 10px; /* Berikan margin di sekitar kartu */
+    padding: 20px; /* Berikan padding di dalam kartu */
+    background-color: #fff; /* Warna latar belakang putih */
+    text-align: center; /* Posisi teks di tengah */
+}
+
+.card img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto 10px; /* Geser gambar ke tengah */
+}
+
+.card h2 {
+    font-size: 1.5em; 
+    padding: 10px;
+}
+
+.card p {
+    font-size: 1em; /* Ukuran font deskripsi */
+}
+
+.testi{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 850px;
+}
+
+.testi h1{
+    margin: 30px;
+}
+
+.testi p{
+    margin-bottom: 30px;
+}
+
+.bungkus {
+    width: 330px;
+    border:1px solid grey;
+    border-radius: 15px; 
+    margin: 10px; /* Berikan margin di sekitar kartu */
+    padding: 20px; /* Berikan padding di dalam kartu */
+    background-color: #fff; /* Warna latar belakang putih */
+    text-align: left; /* Posisi teks di tengah */
+}
+.bungkus p {
+    margin: 10px;
+    border-bottom: 1px solid rgb(153, 153, 153);
+    padding-bottom: 10px;
+}
+.footer-bungkus{
+    padding-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.info{
+    height: 40vh;
+    background-color: #3A84EF;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.info h3{
+    margin-bottom: 20px;
+}
+
+.profile{
+    width: 500px;
+}
+
+.link{
+    padding: 80px;
+}
+
+.link ul{
+    list-style: none;
+}
+
+.link li{
+    margin-bottom: 20px;
+    font-weight: 100;
+}
+
+.lokasi{
+    width: 250px;
+}
+
+.lokasi p{
+    margin-bottom: 10px;
+    font-weight: 100;
+}
+.lokasi .sosmed{
+    display: flex;
+    height: 20px;
+    margin-bottom: 20px;
+}
+
+.lokasi .sosmed img{
+    padding-right: 10px;
+}
+
+footer{
+    border-top:1px solid white;
+    width: auto;
+    height: 90px;
+    background-color: #3A84EF;
+    color: white;
+    display: flex;
+}
+
+footer p {
+    margin-left: 15% ;
+    margin-top: auto;
+    margin-bottom: auto;
+}

@@ -1,0 +1,190 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+/* logo dan navbar menu */
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff;
+  z-index: 1000;
+  position: fixed;
+  padding: 10px;
+  width: 100%;
+}
+
+nav img {
+  height: 60px;
+  width: 100px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0 40px;
+}
+
+nav li {
+  margin: 0 15px;
+  padding: 0px 10px;
+  font-size: larger;
+}
+
+nav li a {
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+}
+
+/* Button */
+button {
+  padding: 20px 50px;
+  font-size: larger;
+  background-color: #ffc600;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+button:hover {
+  background-color: black;
+  cursor: pointer;
+  color: white; /* Warna latar tombol saat digulirkan */
+}
+
+/* Layout */
+.main-container {
+  width: 100%;
+  padding: 10.625rem 15rem;
+}
+
+.main-container h1 {
+  text-align: left;
+  font-size: 32px;
+  margin-bottom: 2rem;
+}
+
+/* Table */
+table{
+  border-collapse: collapse;
+  width: 850px; 
+  height: 50px;
+  margin-left: 100px;
+  margin-bottom: 5rem;
+  font-size: 16px;
+}
+
+td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+/* Tracking */
+.tracking {
+  display: flex;
+  gap: 6rem;
+  font-size: 18px;
+}
+
+.tracking-line {
+  padding: 0 0.2rem;
+}
+
+.tracking .line div {
+  width: 0.5px;
+  height: 100%;
+  background: black;
+  position: relative;
+}
+
+.tracking-info {
+  margin: 0.3rem 0;
+}
+
+.tracking-date {
+  margin-bottom: 3rem
+}
+
+.tracking .line div::before {
+  content: "";
+  width: 27px;
+  height: 27px;
+  background: #3A84EF;
+  border-radius: 50%;
+  position: absolute;
+  left: -10px;
+}
+
+/* Footer */
+.info{
+  height: 40vh;
+  background-color: #3A84EF;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.info h3{
+  margin-bottom: 20px;
+}
+
+.profile {
+  width: 500px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.link {
+  padding: 80px;
+}
+
+.link ul{
+  list-style: none;
+}
+
+.link li{
+  margin-bottom: 20px;
+  font-weight: 100;
+}
+
+.lokasi {
+  width: 250px;
+}
+
+.lokasi p{
+  margin-bottom: 10px;
+  font-weight: 100;
+}
+.lokasi .sosmed{
+  display: flex;
+  height: 20px;
+  margin-bottom: 20px;
+}
+
+.lokasi .sosmed img{
+  padding-right: 10px;
+}
+
+footer{
+  border-top:1px solid white;
+  width: auto;
+  height: 90px;
+  background-color: #3A84EF;
+  color: white;
+  display: flex;
+}
+
+footer p {
+  margin-left: 15% ;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+/*End of Footer */
