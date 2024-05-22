@@ -10,6 +10,7 @@ import OrderPage from './OrderPage';
 import TestiPage from './TestiPage';
 import TrackPage from './TrackPage';
 import ContactPage from './ContactPage';
+import TrackResultPage from './TrackResultPage'
 import LoginPage from './LoginPage';
 
 const Header = () => {
@@ -28,6 +29,7 @@ const LandingPage = () => {
           <Route path="testimoni" element={<TestiPage />} />
           <Route path="lacak" element={<TrackPage />} />
           <Route path="hubungi-kami" element={<ContactPage />} />
+          <Route path="detail-lacak" element={<TrackResultPage />} />
           <Route path="login" element={<LoginPage />} />
         </Routes>
         <Footer />

@@ -311,3 +311,59 @@ body:has(.landing-page ) {
   }
 
 
+
+
+
+  .landing-page .progress-step {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+  }
+  
+  .landing-page .progress-bar {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+  }
+  
+  .landing-page .progress-bar::before {
+    content: '';
+    position: absolute;
+    left: 13.5px;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background-color: #3A84EF;
+  }
+  
+  .landing-page .step {
+    position: relative;
+    padding-left: 40px;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .landing-page .step::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 27px;
+    width: 27px;
+    border-radius: 50%;
+    border: 2px solid #3A84EF;
+    background-color: #fff;
+  }
+  
+  .landing-page .step.active::before {
+    background-color: #3A84EF;
+  }
+  
+  .landing-page .step.active {
+    font-weight: bold;
+    color: #3A84EF;
+  }

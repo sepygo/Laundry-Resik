@@ -55,7 +55,8 @@ const HomePage = () => {
               <div style={{aspectRatio:"4/3",borderTop:"10px solid #FFC600",width:'80%'}} className="px-5 py-4 rounded bg-white">
                 <h3 className="w-100 pb-2" style={{borderBottom:"3px solid #FFC600"}}>Cek Pesanan Disini</h3>
                 <input type="text" className="mt-5 mb-4 px-0 form-control rounded-0 shadow-none" style={{borderBottom:"3px dashed lightgray", borderLeft:"0",borderRight:"0",borderTop:"0"}} id="codeTrack" placeholder="Masukan kode pesanan anda"/>
-                <button className="py-3 px-5 btn btn-warning fw-bold">Cek Disini</button>
+                {/* <button className="py-3 px-5 btn btn-warning fw-bold">Cek Disini</button> */}
+                <NavLink to="/detail-lacak" className="py-3 px-5 btn btn-warning fw-bold">Cek Disini </NavLink>
                 <p className="text-secondary fw-lightlight mt-3 mb-0" style={{fontSize:"14px"}}>
                   Tidak menemukan kode pesanan? <br/>
                   <NavLink to="/hubungi-kami" className="text-primary text-decoration-none fw-bold">Hubungi Kami </NavLink>
