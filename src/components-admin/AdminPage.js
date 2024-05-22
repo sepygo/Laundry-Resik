@@ -7,7 +7,7 @@ import OrderHistoryPage from './OrderHistoryPage';
 import TrackingCodePage from './TrackingCodePage';
 import OrderPage from './OrderPage';
 
-const AdminLayout = () => {
+const AdminPage = () => {
   return (
     <div className="d-flex flex-column h-100">
       <Header />
@@ -27,4 +27,4 @@ const AdminLayout = () => {
   );
 };
 
-export default AdminLayout;
+export default AdminPage;

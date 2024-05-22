@@ -10,24 +10,48 @@ const LoginPage = () => {
     e.preventDefault();
     // Validasi login di sini, misalnya dengan API call
     // Jika berhasil, arahkan ke halaman admin
-    navigate('/admin');
+    navigate('/admin/');
   };
 
   return (
-    <div className="container mt-5">
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">Email address</label>
-          <input type="text" className="form-control" id="uname" value={uname} onChange={(e) => setUname(e.target.value)} required />
+    <section className="py-5 login-hero">
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-md-8 bg-white border p-0">
+            <h2 className="fw-bold form-title p-4 m-0">Masuk</h2>
+            <form className="border-top form-box p-4" onSubmit={handleLogin}>
+              <div className="form-group mb-4">
+                <label className='mb-2' htmlFor="exampleInputEmail1">Alamat Email</label>
+                <input type="text" className="form-control bg-light border-0 py-2" placeholder="Masukan email yang terdaftar" id="uname" value={uname} onChange={(e) => setUname(e.target.value)} required />
+              </div>
+              <div className="form-group border-bottom pb-4">
+                <label className='mb-2' htmlFor="exampleInputPassword1">Kata Sandi</label>
+                <input type="password" className="form-control bg-light border-0 py-2" placeholder="Kata Sandi" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+              </div>
+              <div className="mt-3 d-flex flex-column align-items-center">
+                <button type="submit" className="py-3 px-5 btn btn-dark fw-bold my-2">Masuk</button>
+                <small id="emailHelp" className="form-text text-muted">Belum punya akun? <a href="register.html">Daftar</a></small>
+              </div>
+            </form>
+          </div>
         </div>
-        <div className="mb-3">
-          <label htmlFor="password" className="form-label">Password</label>
-          <input type="password" className="form-control" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-        </div>
-        <button type="submit" className="btn btn-primary">Login</button>
-      </form>
-    </div>
+      </div>
+    </section>
+
+    // <div className="container mt-5">
+    //   <h2>Login</h2>
+    //   <form onSubmit={handleLogin}>
+    //     <div className="mb-3">
+    //       <label htmlFor="email" className="form-label">Email address</label>
+    //       <input type="text" className="form-control" id="uname" value={uname} onChange={(e) => setUname(e.target.value)} required />
+    //     </div>
+    //     <div className="mb-3">
+    //       <label htmlFor="password" className="form-label">Password</label>
+    //       <input type="password" className="form-control" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+    //     </div>
+    //     <button type="submit" className="btn btn-primary">Login</button>
+    //   </form>
+    // </div>
   );
 };
 

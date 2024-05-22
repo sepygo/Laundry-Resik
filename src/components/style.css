@@ -1,0 +1,313 @@
+body:has(.landing-page ) {
+    /* font-family: 'Inter' !important; */
+    background-color: #3A84EF;
+    margin: 0 !important;
+}
+
+.landing-page .btn:not(.btn-sm){
+    border-radius: 10px;
+}
+
+.landing-page .btn-sm{
+    border-radius: 8px;
+}
+
+.landing-page .btn:not(.btn-link):hover{
+    background-color: #000000;
+    border-color: #000000;
+    color: #ffffff;
+}
+
+.landing-page .btn-primary{
+    background-color: #485EFF;
+    border-color: #485EFF;
+    color: #ffffff;
+}
+
+.landing-page .btn-secondary{
+    background-color: #FFC600;
+    border-color: #FFC600;
+    color: #000000;
+}
+
+.landing-page .btn-dark{
+    background-color: #3A84EF;
+    border-color: #3A84EF;
+    color: #ffffff;
+}
+
+.landing-page .tw{
+    color: #ffffff;
+}
+
+.landing-page .fw-bold{
+    font-weight: bold;
+}
+
+.landing-page .fs-14{
+    font-size: 14px;
+}
+
+.landing-page .py-80{
+    padding: 80px 0;
+}
+
+.landing-page header{
+    z-index: 99;
+    position: sticky;
+    top: 0;
+    width: 100%;
+}
+
+.landing-page header.notch{
+    top: -40px;
+}
+
+.landing-page header nav{
+    height: 90px;  
+}
+
+.landing-page header nav .nav-item{
+    color: #000000;
+    font-weight: bold;
+    padding: 8px 16px;
+}
+
+.landing-page header nav .nav-item.active, header nav .nav-item:hover{
+    color: #485EFF;
+}
+
+.landing-page .hero{
+    height: calc(100vh - 90px);
+}
+
+.landing-page .hero.notch{
+    height: calc(100vh - 130px);
+}
+
+.landing-page .card-service{
+    width: 28%;
+    padding-top: 1.25rem;
+    margin: 20px;
+    border-radius: 10px;
+}
+
+.landing-page .card-service img{
+    width: 30%;
+    border-radius: 100%;
+}
+
+.landing-page .card-service p, .card-testi .card-subtitle{
+    font-size: 16px;
+}
+
+.landing-page .card-testi{
+    width: 28%;
+    padding: 1.25rem;
+    margin: 20px;
+    border-radius: 10px;
+}
+
+.landing-page .card-testi .card-body{
+    padding: 0 0 18px 0;
+}
+
+.landing-page .card-testi .card-name{
+    border-top: 2px solid #dee2e6;
+    padding-top: 18px;
+}
+
+.landing-page .card-testi .card-name img{
+    width: 30%;
+}
+
+.landing-page footer img{
+    width: 30%;
+}
+
+.landing-page footer h5{
+    font-size: 18px;
+}
+
+.landing-page footer a{
+    display: block;
+    outline: none;
+    color: white;
+    margin-top: 18px;
+}
+
+.landing-page footer a:hover{
+    text-decoration: none;
+    color: #FFC600;
+}
+
+
+
+
+
+/* login.html*/
+.landing-page .login-hero {
+    background-color: #f8f8f8;
+}
+
+.landing-page .login-hero .col-md-8{
+    border-radius: 15px;
+}
+
+
+
+
+
+/* tracking.html*/
+.landing-page .tracking-hero, .form-hero, .login-hero{
+    min-height: calc(100vh - 90px);
+}
+
+.landing-page .tracking-hero input{
+    border-radius: 10px!important;
+}
+
+.landing-page .tracking-hero span{
+    font-size: 14px;
+}
+
+
+
+
+/* layanan.html */
+.landing-page .price-section img{
+    width: 15%;
+    border-radius: 100%;
+}
+
+.landing-page .price-section .table-con{
+    overflow: hidden;
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
+}
+
+.landing-page .price-section table thead{
+    background-color: #3A84EF;
+    color: #ffffff;
+}
+
+.landing-page .price-section table th, .price-section table td{
+    text-align: center;
+}
+
+
+
+
+/* order.html */
+.landing-page .order-hero .card-service:hover{
+    cursor: pointer;
+    background-color: #f1f1f1;
+}
+
+.landing-page .form-hero input[type="radio"]{
+    visibility: hidden;
+    height: 0;
+    width: 0;
+}
+
+.landing-page .form-hero .label-radio {
+    display: block;
+    text-align: center;
+    cursor: pointer;
+    background-color: #ffffff;
+    border: 5px solid #ffffff00;
+    font-size: 40px;
+    padding: 4px 8px;
+    border-radius: 8px;
+    margin: 0 12px 0 0;
+}
+
+.landing-page .form-hero input[type="radio"]:checked + .label-radio{
+    border-color: #FFC600;
+}
+
+.landing-page .form-hero .label-radio img{
+    height: 30px;
+    margin: 0 12px;
+}
+
+
+
+
+
+.landing-page .contact-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f8f9fa;
+  }
+  
+  .landing-page .contact-bg-svg {
+    background:linear-gradient(170deg, #3A84EF, #3A84EF 50%, white 50%, white);
+  }
+  
+  .landing-page .contact-form {
+    flex: 1;
+    margin-right: 2rem;
+  }
+  
+  .landing-page .contact-form h2 {
+    color: #1a73e8;
+    margin-bottom: 0.5rem;
+  }
+  
+  .landing-page .contact-form p {
+    color: #333;
+    margin-bottom: 1rem;
+  }
+  
+  .contact-form input,
+  .landing-page .contact-form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .landing-page .contact-form button {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #1a73e8;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .landing-page .contact-form button:hover {
+    background-color: #165abb;
+  }
+  
+  .landing-page .contact-info {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .landing-page .contact-info img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 1rem;
+  }
+  
+  .landing-page .contact-info p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+    color: #333;
+  }
+  
+  .landing-page .contact-info i {
+    margin-right: 0.5rem;
+    color: #1a73e8;
+  }
+
+

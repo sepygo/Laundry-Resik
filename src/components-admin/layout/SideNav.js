@@ -27,7 +27,7 @@ const SideNav = () => {
         <NavLink to="/admin/tracking-code" className={({ isActive }) => isActive ? 'nav-link active bg-primary text-white' : 'nav-link'}>
           <FontAwesomeIcon icon={faLocationDot} className='me-3' style={{width:"25px",fontSize:"20px"}}/>Kode Tracking
         </NavLink>
-        <NavLink to="/logout" className="nav-link">
+        <NavLink to="/login" className="nav-link">
           <FontAwesomeIcon icon={faArrowRightFromBracket} className='me-3' style={{width:"25px",fontSize:"20px"}}/>Keluar
         </NavLink>
       </nav>

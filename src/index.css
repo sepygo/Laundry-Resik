@@ -26,7 +26,7 @@ code {
   height: 60;
 }
 
-.nav-link{
+.sidenav-con .nav-link{
   border-top-right-radius: 12px;
   border-bottom-right-radius: 12px;
   color: #000000;
@@ -34,7 +34,7 @@ code {
   margin: 8px 0;
 }
 
-.nav-link:hover{
+.sidenav-con .nav-link:hover{
   /* background-color: #0d6dfd; */
   background-color: #0d6dfd4b;
   color: #000000;
@@ -93,11 +93,11 @@ code {
 }
 
 .quantity-input-group .btn {
-  height: 38px;
+  height: 31px;
 }
 
 .quantity-input-group .form-control {
-  height: 38px;
+  height: 31px;
   max-width: 70px;
   text-align: center;
 }

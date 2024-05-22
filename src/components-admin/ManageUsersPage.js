@@ -2,7 +2,7 @@ import React from 'react';
 import UserTable from './content/UserTable';
 import { Form, FormControl} from 'react-bootstrap';
 
-const Content = () => {
+const ManageUsersPage = () => {
   return (
     <div className="p-5">
       <div className="d-flex justify-content-between align-items-center mb-5">
@@ -33,4 +33,4 @@ const Content = () => {
   );
 };
 
-export default Content;
+export default ManageUsersPage;

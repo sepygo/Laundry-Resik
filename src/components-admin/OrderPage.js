@@ -93,7 +93,7 @@ const OrderPage = () => {
             <h3 className='my-3'>Item</h3>
             <div className="mx-2 d-flex flex-wrap justify-content-between align-items-center">
               {dummyItems[activeCategory].map((item, index) => (
-                <div key={index} className="card my-2" style={{ width: '23%' }}>
+                <div key={index} className="card my-2" style={{ width: '21%' }}>
                   <div className="card-body">
                     <div style={{aspectRatio:"1"}} className='bg-light rounded d-flex justify-content-center align-items-center'>
                       <h3 className="card-title m-0 text-secondary">{item.name}</h3>
@@ -114,14 +114,14 @@ const OrderPage = () => {
                       </div>
                     )} */}
                     <div className="w-100 input-group quantity-input-group">
-                        <button className="btn btn-primary" onClick={() => handleQuantityChange(item.name, -1)}>-</button>
+                        <button className="btn btn-sm btn-primary" onClick={() => handleQuantityChange(item.name, -1)}>-</button>
                         <input
                           type="text"
                           className="form-control text-center"
                           value={quantities[item.name] || 0}
                           readOnly
                         />
-                        <button className="btn btn-primary" onClick={() => handleQuantityChange(item.name, 1)}>+</button>
+                        <button className="btn btn-sm btn-primary" onClick={() => handleQuantityChange(item.name, 1)}>+</button>
                       </div>
                   </div>
                 </div>
