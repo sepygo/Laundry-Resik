@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import './style.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -16,7 +17,7 @@ const TrackPage = () => {
                         </p>
                         <div class="mt-5 d-flex justify-content-center">
                             <input style={{width:'70%'}} class=" form-control form-control-lg" type="text" placeholder="Masukan nomor orderan anda"/>
-                            <button style={{width:'30%'}} class="ms-3 px-5 btn btn-primary">Cari Pesanan</button>
+                            <NavLink to="/detail-lacak" style={{width:'30%'}} className="ms-3 px-5 py-3 btn btn-primary">Cek Pesanan</NavLink>
                         </div>
                         <span>*Masukkan hingga 5 nomor orderan di sini untuk lacak pesanan Anda</span>
                     </div>

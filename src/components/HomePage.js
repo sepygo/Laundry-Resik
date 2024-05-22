@@ -30,7 +30,7 @@ const HomePage = () => {
             <div className="col-6 d-flex flex-column justify-content-between">
               <div>
                 <h6 className="tw fw-bold">BY LAUNDRY RESIK.COM</h6>
-                <h1 className="tw fw-bold mt-4">Bingung Mencari Tempat Dalam Hal memcuci?</h1>
+                <h1 className="tw fw-bold mt-4">Bingung Mencari Tempat Dalam Hal mencuci?</h1>
                 <p className="tw">
                   Yuk, percayakan kepada Laundryresik.com dalam membantu anda untuk 
                   mendapatkan hasil cucian yang bersih, rapih dan nyaman saat beraktifitas.

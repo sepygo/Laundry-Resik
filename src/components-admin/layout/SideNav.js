@@ -10,7 +10,7 @@ const SideNav = () => {
       <div className="mb-4 d-flex align-items-center">
         <img src={avatar} alt="Admin" className="rounded-circle avatar-admin"/>
         <div style={{width: "calc(100% - 100px)"}}>
-          <h5 className="text-truncate" style={{width:"100%"}}>Anthony</h5>
+          <h5 className="text-truncate" style={{width:"100%"}}>Giselle</h5>
           <small>Admin</small>
         </div>
       </div>
