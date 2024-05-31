@@ -1,11 +1,10 @@
 import React from 'react';
-import './style.css';
-import testi1 from '../assets/testi/testi1.png'
-import testi2 from '../assets/testi/testi2.png'
-import testi3 from '../assets/testi/testi3.png'
-import testi4 from '../assets/testi/testi4.png'
-import testi5 from '../assets/testi/testi5.png'
-import testi6 from '../assets/testi/testi6.png'
+import testi1 from '../../assets/testi/testi1.png'
+import testi2 from '../../assets/testi/testi2.png'
+import testi3 from '../../assets/testi/testi3.png'
+import testi4 from '../../assets/testi/testi4.png'
+import testi5 from '../../assets/testi/testi5.png'
+import testi6 from '../../assets/testi/testi6.png'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faQuoteRight} from '@fortawesome/free-solid-svg-icons';

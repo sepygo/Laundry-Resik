@@ -1,10 +1,9 @@
 import React from 'react';
-import './style.css';
-import service1 from '../assets/service/service-1.png'
-import service2 from '../assets/service/service-2.png'
-import service3 from '../assets/service/service-3.png'
-import service4 from '../assets/service/service-4.png'
-import service5 from '../assets/service/service-5.png'
+import service1 from '../../assets/service/service-1.png'
+import service2 from '../../assets/service/service-2.png'
+import service3 from '../../assets/service/service-3.png'
+import service4 from '../../assets/service/service-4.png'
+import service5 from '../../assets/service/service-5.png'
 
 const ServicePage = () => {
   return (

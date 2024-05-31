@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import '../style.css';
 import logo from '../../assets/logo-white.png';
 
 const HeaderNav = () => {
@@ -30,7 +29,7 @@ const HeaderNav = () => {
                     </NavLink>
                 </div>
                 <div className="d-flex align-items-center">
-                    <a href="/login" className="py-3 px-5 btn btn-secondary fw-bold">Masuk</a>
+                    <a href="/login" style={{visibility:"hidden"}} className="py-3 px-5 btn btn-secondary fw-bold">Masuk</a>
                 </div>
                 </nav>
             </div>

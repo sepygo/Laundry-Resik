@@ -1,20 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavLink } from 'react-router-dom';
-import Footer from './layout/Footer';
-import './style.css';
-import heroImg from '../assets/home-header.png';
-import home2 from '../assets/home2.png'
-import service1 from '../assets/service/service-1.png'
-import service2 from '../assets/service/service-2.png'
-import service3 from '../assets/service/service-3.png'
-import service4 from '../assets/service/service-4.png'
-import service5 from '../assets/service/service-5.png'
-import testi1 from '../assets/testi/testi1.png'
-import testi2 from '../assets/testi/testi2.png'
-import testi3 from '../assets/testi/testi3.png'
-import testi4 from '../assets/testi/testi4.png'
-import testi5 from '../assets/testi/testi5.png'
-import testi6 from '../assets/testi/testi6.png'
+import home2 from '../../assets/home2.png'
+import service1 from '../../assets/service/service-1.png'
+import service2 from '../../assets/service/service-2.png'
+import service3 from '../../assets/service/service-3.png'
+import service4 from '../../assets/service/service-4.png'
+import service5 from '../../assets/service/service-5.png'
+import testi1 from '../../assets/testi/testi1.png'
+import testi2 from '../../assets/testi/testi2.png'
+import testi3 from '../../assets/testi/testi3.png'
+import testi4 from '../../assets/testi/testi4.png'
+import testi5 from '../../assets/testi/testi5.png'
+import testi6 from '../../assets/testi/testi6.png'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faQuoteRight} from '@fortawesome/free-solid-svg-icons';

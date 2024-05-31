@@ -1,0 +1,120 @@
+.admin-header-nav{
+    height: 86px;
+}
+
+.admin-header-logo{
+  height: 60;
+}
+
+.sidenav-con .nav-link{
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  color: #000000;
+  font-size: 18px;
+  margin: 8px 0;
+}
+
+.sidenav-con .nav-link:hover{
+  /* background-color: #0d6dfd; */
+  background-color: #0d6dfd4b;
+  color: #000000;
+}
+
+.sidenav-con{
+  width: 20vw;
+  max-width: 330px;
+}
+
+.sidenav-icon{
+  width: 20px;
+}
+
+.avatar-admin{
+  width: 60px;
+  margin: 0 20px;
+}
+
+.admin-content-con, .main-layout-con{
+  height: calc(100vh - 86px);
+}
+
+.order-page-con{
+  height: 100%;
+}
+
+.icon-box-con{
+  border-radius: 10px;
+}
+
+.icon-box-con:hover{
+  background-color: #ffc107;
+}
+
+.icon-box-con:hover .icon-box .svg-inline--fa{
+  color: #000000!important;
+}
+
+.icon-box-con:not(.active) .icon-box .svg-inline--fa{
+  color: lightgray;
+}
+
+.icon-box{
+  width: 100%;
+  aspect-ratio: 1;
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid whitesmoke;
+}
+
+.quantity-input-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quantity-input-group .btn {
+  height: 31px;
+}
+
+.quantity-input-group .form-control {
+  height: 31px;
+  max-width: 70px;
+  text-align: center;
+}
+
+.bill-con{
+  height: calc(100vh - 86px);
+}
+
+.bill-list{
+  height: calc(85% - 41.6px);
+  max-height: calc(85% - 41.6px);
+  overflow: auto;
+}
+
+.item-thumb{
+  aspect-ratio: 1;
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.item-detail{
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.item-qty{
+  display: flex;
+  align-items: center;
+}
+
+.bill-footer{
+  height: 15%;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}

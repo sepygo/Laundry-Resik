@@ -1,5 +1,5 @@
 import React from 'react';
-import UserTable from './content/UserTable';
+import UserTable from '../../components/admin/UserTable';
 import { Form, FormControl} from 'react-bootstrap';
 
 const ManageUsersPage = () => {

@@ -1,7 +1,5 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import './style.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const TrackPage = () => {
   return (
