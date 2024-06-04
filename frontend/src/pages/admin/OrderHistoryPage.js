@@ -1,12 +1,17 @@
-import React from 'react';
-import { Form, FormControl} from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Form, FormControl, Button, Table} from 'react-bootstrap';
+import Modal from 'react-bootstrap/Modal';
 
-import { Table, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { faPen } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faPen, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 
 const OrderHistoryPage = () => {
+
+  // canvas 
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
     <div className="p-5">
       <div className="d-flex justify-content-between align-items-center mb-5">
@@ -38,9 +43,8 @@ const OrderHistoryPage = () => {
             <th className='bg-primary text-white'>Tanggal</th>
             <th className='bg-primary text-white'>Nama Pemesan</th>
             <th className='bg-primary text-white'>Alamat</th>
-            <th className='bg-primary text-white'>Layanan</th>
             <th className='bg-primary text-white'>Status</th>
-            <th className='bg-primary text-white'>Aksi</th>
+            <th className='bg-primary text-white'>Detail</th>
           </tr>
         </thead>
         <tbody>
@@ -48,12 +52,30 @@ const OrderHistoryPage = () => {
             <td className='text-center'>12310</td>
             <td>10/10/2024</td>
             <td>John Doe</td>
-            <td>Jl. Mohamad Toha No.57 Kota Bandung, Jawa Barat</td>
-            <td>Cuci Karpet</td>
+            <td>Jl. Mohamad Toha No.57 Kota Medan</td>
             <td>Verifikasi</td>
             <td className='text-center'>
-              <Button variant="primary" size="sm" className="me-2"><FontAwesomeIcon icon={faPen} className='mx-2'/></Button>
-              <Button variant="danger" size="sm"><FontAwesomeIcon icon={faTrash} className='mx-2'/></Button>
+              <Button className="btn btn-sm btn-primary me-2" onClick={handleShow}><FontAwesomeIcon icon={faCircleInfo} className='mx-2'/></Button>
+            </td>
+          </tr>
+          <tr>
+            <td className='text-center'>12310</td>
+            <td>10/10/2024</td>
+            <td>Brie willis</td>
+            <td>Jl. Sulfat G-12 Kota Medan</td>
+            <td>Proses</td>
+            <td className='text-center'>
+              <Button className="btn btn-sm btn-primary me-2" onClick={handleShow}><FontAwesomeIcon icon={faCircleInfo} className='mx-2'/></Button>
+            </td>
+          </tr>
+          <tr>
+            <td className='text-center'>12310</td>
+            <td>10/10/2024</td>
+            <td>Adi Candra</td>
+            <td>Jl. Ikhsan Kasim no.68 Kota Medan</td>
+            <td>Selesai</td>
+            <td className='text-center'>
+              <Button className="btn btn-sm btn-primary me-2" onClick={handleShow}><FontAwesomeIcon icon={faCircleInfo} className='mx-2'/></Button>
             </td>
           </tr>
         </tbody>
@@ -75,6 +97,54 @@ const OrderHistoryPage = () => {
           </li>
         </ul>
       </nav>
+
+      <Modal show={show} onHide={handleClose} size="lg" centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Detail Pesanan</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <table className="table table-bordered">
+              <tbody>
+                <tr>
+                  <td>Status</td>
+                  <td className='text-success fw-bold'>Selesai</td>
+                </tr>
+                <tr>
+                  <td>Nomor Pesanan</td>
+                  <td>54321</td>
+                </tr>
+                <tr>
+                  <td>Nama</td>
+                  <td>Harper Downey</td>
+                </tr>
+                <tr>
+                  <td>Alamat</td>
+                  <td>Jl. Mohamad Toha No.57 Kota Bandung, Jawa Barat</td>
+                </tr>
+                <tr>
+                  <td>Layanan</td>
+                  <td>Cuci Sepatu</td>
+                </tr>
+                <tr>
+                    <td rowSpan={2}>Item</td>
+                    <td>3pcs - Sepatu Suede</td>
+                </tr>
+                <tr>
+                    <td>1pcs - Sepatu Sneaker</td>
+                </tr>
+                <tr>
+                    <td className='fw-bold'>Total Biaya</td>
+                    <td className='fw-bold'>Rp.250.000</td>
+                </tr>
+              </tbody>
+            </table>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

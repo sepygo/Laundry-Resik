@@ -118,3 +118,7 @@
   flex-direction: column;
   justify-content: end;
 }
+
+.offcanvas.offcanvas-order{
+  height: fit-content;
+}

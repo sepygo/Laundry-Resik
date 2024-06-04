@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Row } from 'react-bootstrap';
+import Offcanvas from 'react-bootstrap/Offcanvas';
+import Button from 'react-bootstrap/Button';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faScaleBalanced, faShirt, faRug, faBabyCarriage, faSocks } from '@fortawesome/free-solid-svg-icons';
@@ -69,6 +71,11 @@ const OrderPage = () => {
       };
     });
   };
+
+  // canvas 
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
     <div className='container-fluid order-page-con'>
@@ -179,10 +186,47 @@ const OrderPage = () => {
                 <h5 className='fw-normal'>Total : </h5>
                 <h5>Rp.410.000</h5>
               </div>
-              <button className="w-100 btn btn-primary">Buat Pesanan</button>
+              <Button className="w-100 btn btn-warning" onClick={handleShow}>Buat Pesanan</Button>
             </div>
           </div>
         </Row>
+
+        <Offcanvas className='offcanvas-order' show={show} onHide={handleClose} placement='bottom'>
+          <Offcanvas.Header closeButton>
+            <Offcanvas.Title>Detail Pemesan</Offcanvas.Title>
+          </Offcanvas.Header>
+          <Offcanvas.Body>
+            <div className='container'>
+                    <Row>
+                      <div class="col-md-4">
+                          <label for="searchCustOrder" class="form-label">Cari Pemesan</label>
+                          <input type="text" class="form-control input-wizard" id="searchCustOrder" placeholder='Cari Nama Pemesan'/>
+                      </div>
+                      <form class="row h-100 g-3 px-4">
+                          <div class="col-md-6">
+                              <label for="nameOrder" class="form-label">Nama Lengkap</label>
+                              <input type="text" class="form-control input-wizard" id="nameOrder" placeholder='Masukan Nama Anda'/>
+                          </div>
+                          <div class="col-md-6">
+                              <label for="telpOrder" class="form-label">Nomor WA <i class="bi-whatsapp"></i></label>
+                              <input type="text" class="form-control input-wizard" id="telpOrder"  placeholder='Masukan Nomor Whastapp Anda'/>
+                          </div>
+                          <div class="col-md-6">
+                              <label for="addressOrder" class="form-label">Alamat Lengkap</label>
+                              <textarea class="form-control input-wizard" id="addressOrder" rows="3" placeholder='Masukan Alamat Lengkap Anda'></textarea>
+                          </div>
+                          <div class="col-md-6">
+                              <label for="notesOrder" class="form-label">Catatan</label>
+                              <textarea class="form-control input-wizard" id="notesOrder" rows="3" placeholder='Tambahkan Catatan Jika Ada'></textarea>
+                          </div>
+                          <div class="col-12">
+                            <button class="btn w-100 btn-success">Buat Pesanan</button>
+                          </div>
+                      </form>
+                    </Row>
+            </div>
+          </Offcanvas.Body>
+        </Offcanvas>
     </div>
   );
 };

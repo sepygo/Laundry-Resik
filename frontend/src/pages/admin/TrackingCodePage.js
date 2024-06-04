@@ -1,17 +1,22 @@
-import React from 'react';
-import { Form, FormControl} from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Form, FormControl, Table, Button} from 'react-bootstrap';
+import Modal from 'react-bootstrap/Modal';
 
-import { Table, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 
 const TrackingCodePage = () => {
+
+  // canvas 
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
     <div className="p-5">
       <div className="d-flex justify-content-between align-items-center mb-5">
         <h2 className="mb-0">Kelola Kode Tracking</h2>
-        <button className="btn btn-lg btn-primary py-3 px-4">+ Tambah Pesanan</button>
       </div>
       <div className="d-flex justify-content-between align-items-center mb-4">
         <div>
@@ -39,7 +44,6 @@ const TrackingCodePage = () => {
             <th className='bg-primary text-white'>Tanggal</th>
             <th className='bg-primary text-white'>Nama Pemesan</th>
             <th className='bg-primary text-white'>Alamat</th>
-            <th className='bg-primary text-white'>Layanan</th>
             <th className='bg-primary text-white'>Status</th>
             <th className='bg-primary text-white'>Aksi</th>
           </tr>
@@ -48,12 +52,33 @@ const TrackingCodePage = () => {
           <tr>
             <td className='text-center'>12310</td>
             <td>10/10/2024</td>
-            <td>John Doe</td>
-            <td>Jl. Mohamad Toha No.57 Kota Bandung, Jawa Barat</td>
-            <td>Cuci Karpet</td>
-            <td>Verifikasi</td>
+            <td>Jason Joe</td>
+            <td>Jl. Ikhsan Kasim no.68 Kota Medan</td>
+            <td>Siap Ambil</td>
             <td className='text-center'>
-              <Button variant="primary" size="sm" className="me-2"><FontAwesomeIcon icon={faPen} className='mx-2'/></Button>
+              <Button variant="primary" size="sm" className="me-2" onClick={handleShow}><FontAwesomeIcon icon={faPen} className='mx-2'/></Button>
+              <Button variant="danger" size="sm"><FontAwesomeIcon icon={faTrash} className='mx-2'/></Button>
+            </td>
+          </tr>
+          <tr>
+            <td className='text-center'>12375</td>
+            <td>10/10/2024</td>
+            <td>Maliki Aston</td>
+            <td>Jl. Mohamad Toha No.57 Kota Medan</td>
+            <td>Proses</td>
+            <td className='text-center'>
+              <Button variant="primary" size="sm" className="me-2" onClick={handleShow}><FontAwesomeIcon icon={faPen} className='mx-2'/></Button>
+              <Button variant="danger" size="sm"><FontAwesomeIcon icon={faTrash} className='mx-2'/></Button>
+            </td>
+          </tr>
+          <tr>
+            <td className='text-center'>12946</td>
+            <td>10/10/2024</td>
+            <td>Daniel Syah</td>
+            <td>Jl. Sulfat G-12 Kota Medan</td>
+            <td>Proses</td>
+            <td className='text-center'>
+              <Button variant="primary" size="sm" className="me-2" onClick={handleShow}><FontAwesomeIcon icon={faPen} className='mx-2'/></Button>
               <Button variant="danger" size="sm"><FontAwesomeIcon icon={faTrash} className='mx-2'/></Button>
             </td>
           </tr>
@@ -76,6 +101,61 @@ const TrackingCodePage = () => {
           </li>
         </ul>
       </nav>
+
+      <Modal show={show} onHide={handleClose} size="lg" centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Detail Pesanan</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <table className="table table-bordered">
+              <tbody>
+                <tr>
+                  <td>Status</td>
+                  <td className='text-success'>
+                    <select class="form-select" aria-label="Default select example">
+                      <option value="1">Verifikasi</option>
+                      <option value="2" selected>Proses</option>
+                      <option value="3">Siap Ambil</option>
+                      <option value="4">Selesai</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Nomor Pesanan</td>
+                  <td>54321</td>
+                </tr>
+                <tr>
+                  <td>Nama</td>
+                  <td>Harper Downey</td>
+                </tr>
+                <tr>
+                  <td>Alamat</td>
+                  <td>Jl. Mohamad Toha No.57 Kota Bandung, Jawa Barat</td>
+                </tr>
+                <tr>
+                  <td>Layanan</td>
+                  <td>Cuci Sepatu</td>
+                </tr>
+                <tr>
+                    <td rowSpan={2}>Item</td>
+                    <td>3pcs - Sepatu Suede</td>
+                </tr>
+                <tr>
+                    <td>1pcs - Sepatu Sneaker</td>
+                </tr>
+                <tr>
+                    <td className='fw-bold'>Total Biaya</td>
+                    <td className='fw-bold'>Rp.250.000</td>
+                </tr>
+              </tbody>
+            </table>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleClose}>
+            Simpan
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };
