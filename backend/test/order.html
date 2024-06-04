@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+          <a class="navbar-brand mb-0 h1" href="#">Laundry Resik API</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="index.html">Users</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="categories.html">Categories</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="services.html">Services</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="order.html">Order</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      
+      <div class="container">
+        <h1 class="mt-5">Order API</h1>
+        <div class="mt-3 mb-3">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#orderModal" id="addOrderBtn">Tambah</button>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Order Date</th>
+                    <th>Status</th>
+                    <th>Total Price</th>
+                    <th>Customer Name</th>
+                    <th>Telephone</th>
+                    <th>Address</th>
+                    <th>Notes</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="orderTableBody">
+                <!-- Order data will be inserted here -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Order Modal -->
+    <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="orderModalLabel">Add Order</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="orderForm">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-6 border-end">
+                                    <input type="hidden" id="orderId">
+                        <div class="mb-3">
+                            <label for="order_date" class="form-label">Order Date</label>
+                            <input type="date" class="form-control" id="order_date" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <!-- <label for="status" class="form-label">Status</label> -->
+                            <input type="hidden" value="Verifikasi" class="form-control" id="status" required>
+                        </div>
+                            <div class="mb-3">
+                                <label for="customer_name" class="form-label">Customer Name</label>
+                                <input type="text" class="form-control" id="customer_name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="telp" class="form-label">Telephone</label>
+                                <input type="text" class="form-control" id="telp" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="address" class="form-label">Address</label>
+                                <input type="text" class="form-control" id="address" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="notes" class="form-label">Notes</label>
+                                <textarea class="form-control" id="notes"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="total_price" class="form-label">Total Price</label>
+                                <input type="number" class="form-control" id="total_price" required readonly>
+                            </div>
+                                </div>
+                                <div class="col-6">
+                                    <h5>Pesanan :</h5>
+                                    <div id="orderItemsContainer">
+                                        <!-- Order items will be inserted here -->
+                                    </div>
+                                    <button type="button" class="w-100 btn btn-sm btn-success mt-3" id="addOrderItemBtn">Tambah Layanan</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <hr>
+                        <button type="submit" class="w-100 btn btn-primary" id="saveOrderBtn">Buat Pesanan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+            const apiUrl = 'http://localhost:3100/api/orders'; // Sesuaikan dengan URL API Anda
+            const servicesApiUrl = 'http://localhost:3100/api/services'; // Sesuaikan dengan URL API layanan Anda
+            const itemsUrl = 'http://localhost:3100/api/order-items'; // Sesuaikan dengan URL API Anda
+
+            // get date
+            function getCurrentDate() {
+                const currentDate = new Date().toISOString().slice(0, 10);
+                return currentDate;
+            }
+
+            // Function to fetch and display orders
+            function fetchOrders() {
+                $.ajax({
+                    url: apiUrl,
+                    method: 'GET',
+                    success: function(orders) {
+                        let orderRows = '';
+                        orders.forEach(order => {
+                            orderRows += `
+                                <tr>
+                                    <td>${order.id}</td>
+                                    <td>${order.order_date}</td>
+                                    <td>${order.status}</td>
+                                    <td>${order.total_price}</td>
+                                    <td>${order.customer_name}</td>
+                                    <td>${order.telp}</td>
+                                    <td>${order.address}</td>
+                                    <td>${order.notes}</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-warning editOrderBtn" data-id="${order.id}">Edit</button>
+                                        <button class="btn btn-sm btn-danger deleteOrderBtn" data-id="${order.id}">Delete</button>
+                                    </td>
+                                </tr>
+                            `;
+                        });
+                        $('#orderTableBody').html(orderRows);
+                    }
+                });
+            }
+
+            
+            fetchOrders();
+
+            // Open modal
+            $('#addOrderBtn').click(function() {
+                $('#orderForm')[0].reset();
+                $('#orderId').val('');
+                $('#order_date').val(getCurrentDate()); // Set current date
+                $('#orderModalLabel').text('Add Order');
+                $('#orderItemsContainer').empty(); // Clear order items container
+                $('#addOrderItemBtn').attr('disabled', false); // Enable add item button
+                $('#orderModal').modal('show');
+            });
+
+            // Save order (add or update)
+            $('#orderForm').submit(function(event) {
+                event.preventDefault();
+                const orderData = {
+                    order_date: $('#order_date').val(),
+                    status: $('#status').val(),
+                    total_price: $('#total_price').val(),
+                    customer_name: $('#customer_name').val(),
+                    telp: $('#telp').val(),
+                    address: $('#address').val(),
+                    notes: $('#notes').val(),
+                    order_items: [] // Initialize array to store order items
+                };
+
+                // Iterate through each order item
+                $('#orderItemsContainer .order-item').each(function() {
+                    const serviceId = $(this).find('.service-id').val();
+                    const quantity = $(this).find('.quantity').val();
+                    var price = $(this).find('.total-price').attr('val-price');
+                    price = parseInt(price);
+                    // Add order item to order data
+                    orderData.order_items.push({
+                        service_id: serviceId,
+                        quantity: quantity,
+                        price: price
+                    });
+                });
+
+                // Check if order items are added
+                if (orderData.order_items.length === 0) {
+                    alert('Please add at least one item to the order.');
+                    return;
+                }
+
+                // Add or update order
+                const orderId = $('#orderId').val();
+                const requestMethod = orderId ? 'PUT' : 'POST';
+                const apiUrls = orderId ? `${apiUrl}/${orderId}` : apiUrl;
+
+                $.ajax({
+                    url: apiUrls,
+                    method: requestMethod,
+                    contentType: 'application/json',
+                    data: JSON.stringify(orderData),
+                    success: function(order) {
+                        // Save order items
+                        const orderId = order.id;
+                        const orderItemsData = orderData.order_items.map(item => ({
+                            order_id: order.id,
+                            service_id: item.service_id,
+                            quantity: item.quantity,
+                            price: item.price
+                        }));
+                        $('#orderModal').modal('hide');
+                        fetchOrders();
+                    }
+                });
+            });
+
+            // Edit order
+            $(document).on('click', '.editOrderBtn', function() {
+                const orderId = $(this).data('id');
+                $.ajax({
+                    url: `${apiUrl}/${orderId}`,
+                    method: 'GET',
+                    success: function(order) {
+                        $('#orderId').val(order.id);
+                        $('#order_date').val(order.order_date);
+                        $('#status').val(order.status);
+                        $('#total_price').val(order.total_price);
+                        $('#customer_name').val(order.customer_name);
+                        $('#telp').val(order.telp);
+                        $('#address').val(order.address);
+                        $('#notes').val(order.notes);
+
+                        // Add order items to modal
+                        $('#orderItemsContainer').empty();
+                        order.order_items.forEach(item => {
+                            $('#orderItemsContainer').append(`
+                                <div class="mb-3 order-item">
+                                    <input type="hidden" class="service-id" value="${item.service_id}">
+                                    <label>Service: ${item.service_name}</label>
+                                    <input type="number" class="form-control quantity" placeholder="Quantity" value="${item.quantity}" required>
+                                    <input type="number" class="form-control price" placeholder="Price" value="${item.price}" required>
+                                    <button type="button" class="btn btn-danger removeOrderItemBtn">Remove</button>
+                                </div>
+                            `);
+                        });
+
+                        $('#addOrderItemBtn').attr('disabled', true); // Disable add item button
+                        $('#orderModalLabel').text('Edit Order');
+                        $('#orderModal').modal('show');
+                    }
+                });
+            });
+
+            // Delete order
+            $(document).on('click', '.deleteOrderBtn', function() {
+                const orderId = $(this).data('id');
+                if (confirm('Yakinn order nya di hapus?')) {
+                    $.ajax({
+                        url: `${apiUrl}/${orderId}`,
+                        method: 'DELETE',
+                        success: function() {
+                            fetchOrders();
+                        }
+                    });
+                }
+            });
+
+            // Function to update price display for an order item
+            function updatePriceDisplay(element) {
+                const orderItem = element.closest('.order-item');
+                const price = parseFloat(orderItem.find(':selected').data('price'));
+                const quantity = parseFloat(orderItem.find('.quantity').val());
+                const totalPrice = price * quantity;
+                orderItem.find('.price-display .service-price').text(price);
+                orderItem.find('.price-display .total-price').text(totalPrice);
+                orderItem.find('.price-display .total-price').attr('val-price', totalPrice);
+            }
+
+            function calculateTotalPrice() {
+                let totalPrice = 0;
+                $('.order-item').each(function() {
+                    const price = parseFloat($(this).find('.total-price').text());
+                    if (!isNaN(price)) {
+                        totalPrice += price;
+                    }
+                });
+                $('#total_price').val(totalPrice);
+            }
+
+            $(document).on('change', '.service-id', function() {
+                updatePriceDisplay($(this));
+                calculateTotalPrice();
+            });
+
+            // Update price display when quantity is changed
+            $(document).on('input', '.quantity', function() {
+                updatePriceDisplay($(this));
+                calculateTotalPrice();
+            });
+
+            // Add order item
+            $('#addOrderItemBtn').click(function() {
+                $.ajax({
+                    url: servicesApiUrl,
+                    method: 'GET',
+                    success: function(services) {
+                        let serviceOptions = '';
+                        services.forEach(service => {
+                            serviceOptions += `<option value="${service.id}" data-price="${service.price}">${service.name}</option>`;
+                        });
+
+                        $('#orderItemsContainer').append(`
+                            <div class="mb-3 order-item">
+                                <select class="form-control service-id">
+                                    <option selected disabled>Pilih Item</option>
+                                    ${serviceOptions}
+                                </select>
+                                <input type="number" class="form-control quantity" placeholder="Quantity" required min="1" value="1">
+                                <div class="d-flex justify-content-between">
+                                    <span class="price-display">Harga: Rp.<span class="service-price"></span></span>
+                                    <span class="price-display">Total: Rp.<span class="total-price"></span></span>
+                                </div>
+                                <button type="button" class="w-100 btn btn-sm btn-danger removeOrderItemBtn">Remove</button>
+                                <hr>
+                            </div>
+                        `);
+                    }
+                });
+            });
+
+            // Remove order item
+            $(document).on('click', '.removeOrderItemBtn', function() {
+                $(this).parent().remove();
+            });
+        });
+    </script>
+</body>
+</html>
