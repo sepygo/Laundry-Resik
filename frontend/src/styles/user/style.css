@@ -159,7 +159,7 @@ body:has(.landing-page ) {
 
 
 /* tracking.html*/
-.landing-page .tracking-hero, .form-hero, .login-hero{
+.landing-page .tracking-hero, .form-hero, .login-hero, .order-hero{
     min-height: calc(100vh - 90px);
 }
 
@@ -367,3 +367,123 @@ body:has(.landing-page ) {
   font-weight: bold;
   color: #3A84EF;
 }
+
+
+
+
+
+
+
+
+
+
+
+/* src/StepForm.css */
+.landing-page .wizard .step-form-container {
+  display: flex;
+  min-height: 70vh;
+  background: white;
+  border-radius: 5px;
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+}
+
+.landing-page .wizard .step-navigation {
+  width: 200px;
+  height: 50vh;
+  /* background: #2a2a72; */
+  /* color: white; */
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  margin-right: 20px;
+}
+
+.landing-page .wizard .step-con{
+    padding-right: 60%;
+}
+
+.landing-page .wizard .step-item {
+    aspect-ratio: 1/1;
+    width: 40px;
+    height: auto;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+    background-color: lightgray;
+    color: white;
+}
+
+.landing-page .wizard .step-item.active {
+  background: #4CAF50;
+}
+
+.landing-page .wizard .step-item.completed {
+  background: #4CAF50;
+}
+
+.landing-page .wizard .vertical-lines {
+    height: 100px;
+    border-left: 3px solid lightgray;
+}
+
+.landing-page .wizard .vertical-lines.active, .landing-page .wizard .vertical-lines.completed {
+    border-left: 3px solid green;
+}
+
+.landing-page .wizard .step-icon {
+  font-size: 20px;
+  /* margin-right: 10px; */
+}
+
+.landing-page .wizard .step-name {
+  font-size: 16px;
+}
+
+.landing-page .wizard .step-form-content {
+  padding: 20px;
+  width: 100%;
+}
+
+/* .landing-page .wizard input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+} */
+
+.landing-page .card-img-service-order{
+    width: 6%;
+}
+
+.landing-page .wizard .form-check .form-check-input{
+    aspect-ratio: 1/1;
+    width: 3%;
+    height: auto;
+}
+
+.landing-page .wizard .input-wizard{
+    border: 0;
+    background-color: #f8f8f8;
+}
+
+.landing-page .wizard .input-wizard.readonly{
+    background-color: #f0f0f0;
+}
+
+/* .landing-page .wizard button {
+  padding: 10px 20px;
+  margin: 10px 5px;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.landing-page .wizard button:hover {
+  background-color: #45a049;
+} */

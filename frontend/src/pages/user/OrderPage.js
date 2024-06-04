@@ -5,13 +5,20 @@ import service3 from '../../assets/service/service-3.png'
 import service4 from '../../assets/service/service-4.png'
 import service5 from '../../assets/service/service-5.png'
 
+import Wizard from '../../components/user/Wizard';
+
 const OrderPage = () => {
   return (
-    <div>
-        <section class="py-4 bg-white order-hero">
+    <div className='wizard'>
+        <section class="py-4 bg-light order-hero">
         <div class="container">
             <div class="row">
-                <div class="col-12">
+                <div className='col-12'>
+                    <h2 class="fw-bold text-center">Form<span className='text-primary'> Pemesanan</span></h2>
+                    <h6 class="text-center">Buat pesanan dan kurir akan menjemput cucianmu</h6>
+                    <Wizard />
+                </div>
+                {/* <div class="col-12">
                     <h2 class="fw-bold text-center">Pilih Jenis Layanan</h2>
                     <div class="w-100 d-flex flex-wrap justify-content-center align-items-center">
                         <div class="card card-service" onclick="location.href = 'form-order.html';">
@@ -65,7 +72,7 @@ const OrderPage = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     </section>
