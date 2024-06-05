@@ -487,3 +487,91 @@ body:has(.landing-page ) {
 .landing-page .wizard button:hover {
   background-color: #45a049;
 } */
+
+
+
+
+@media only screen and (max-width: 576px) {
+  .landing-page .hero, .landing-page .hero.notch{
+    height: calc(100vh - 84px);
+  }
+
+  footer h6{
+    text-align: center;
+  }
+
+  .btn-hero{
+    padding: 12px 24px!important;
+    margin-top: 24px;
+  }
+
+  .img-what{
+    width: 100%;
+    margin-bottom: 24px;
+  }
+
+  .landing-page .card-service{
+    width: 35%;
+  }
+
+  .landing-page .card-service img{
+    width: 70%;
+  }
+
+  .landing-page .card-service h5{
+    font-size: 12px;
+  }
+
+  .landing-page .card-testi{
+    width: 45%;
+    margin: 0 0 20px 0!important;
+  }
+
+  .landing-page .card-testi p{
+    font-size: 14px;
+  }
+
+  .landing-page .card-testi .card-name img{
+    width: 25%;
+  }
+
+  .landing-page .card-testi h5{
+    font-size: 12px;
+    margin-bottom: 0;
+  }
+
+  .landing-page .card-testi span{
+    font-size: 10px;
+  }
+  
+  .landing-page .price-section img{
+    width: 12%;
+    margin-left: 12px;
+  }
+
+  .landing-page .tracking-hero .input-box{
+    justify-content: center !important;
+  }
+
+  .landing-page .tracking-hero .input-box input{
+    width: 100%!important;
+  }
+
+  .landing-page .tracking-hero .input-box .btn{
+    width: 80%!important;
+    margin: 14px 0 0 0 !important;
+    padding: 10px 0!important;
+  }
+
+  .landing-page .contact-form{
+    margin: 0;
+  }
+
+  .landing-page .card-img-service-order {
+    width: 15%;
+  }
+
+  .landing-page .wizard .form-check .form-check-input {
+    width: 8%;
+}
+}

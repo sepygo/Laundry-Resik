@@ -10,7 +10,7 @@ const TrackResultPage = () => {
           </div>
         </div>
         <div className="row justify-content-center">
-        <div className="col-3 progress-step">
+          <div className="d-none d-sm-flex col-3 progress-step">
                 <ul className="progress-bar">
                 <li className="step active">Input Pesanan</li>
                 <li className="step active">Verifikasi</li>
@@ -18,13 +18,13 @@ const TrackResultPage = () => {
                 <li className="step">Siap Ambil</li>
                 <li className="step">Selesai</li>
                 </ul>
-            </div>
-          <div className="col-9">
+          </div>
+          <div className="col-12 col-sm-9">
             <table className="table table-bordered">
               <tbody>
                 <tr>
                   <td>Status</td>
-                  <td>Proses</td>
+                  <td className="text-warning">Proses</td>
                 </tr>
                 <tr>
                   <td>Nomor Pesanan</td>

@@ -6,20 +6,20 @@ const Step3 = ({ formData, setFormData, nextStep, prevStep }) => {
   return (
     <div>
         <h3>Konfirmasi Pesanan</h3>
-        <h4 className='fw-regular ms-3'>Pesanan :</h4>
+        <h4 className='fw-regular ms-sm-3 mt-3 mt-sm-0'>Pesanan :</h4>
         <div className='d-flex flex-wrap px-4 '>
-            <div className='p-2 me-3 border border-primary rounded d-flex align-items-center'>
+            <div className='p-2 me-3 mt-2 mt-sm-0 border border-primary rounded d-flex align-items-center'>
                 <img src={service1} class="me-2" alt="" style={{width:'35px'}}/>
                 <h5 className='mb-0'>Laundry Kiloan</h5>
             </div>
-            <div className='p-2 me-3 border border-primary rounded d-flex align-items-center'>
+            <div className='p-2 me-3 mt-2 mt-sm-0 border border-primary rounded d-flex align-items-center'>
                 <img src={service4} class="me-2" alt="" style={{width:'35px'}}/>
                 <h5 className='mb-0'>Laundry Sepatu</h5>
             </div>
         </div>
         
-        <h4 className='fw-regular ms-3 mt-4'>Data Diri :</h4>
-        <form class="row g-3 px-4">
+        <h4 className='fw-regular ms-sm-3 mt-4'>Data Diri :</h4>
+        <form class="row g-3 px-sm-4">
             <div class="col-md-6">
                 <label for="nameOrder" class="form-label">Nama Lengkap</label>
                 <input type="text" class="form-control input-wizard readonly" id="nameOrder" value="Dimas putra anhar" readOnly />
@@ -37,7 +37,7 @@ const Step3 = ({ formData, setFormData, nextStep, prevStep }) => {
                 <textarea class="form-control input-wizard readonly" id="notesOrder" value="Batik Terpisah" readOnly rows="3"></textarea>
             </div>
         </form>
-        <div className='w-100 d-flex justify-content-end mt-3 pe-4'>
+        <div className='w-100 d-flex justify-content-end mt-3 pe-sm-4'>
             <button onClick={prevStep} className='btn px-4 me-3 rounded btn-warning'>Back</button>
             <button onClick={nextStep} className='btn px-4 rounded btn-success'><i class="bi-whatsapp"></i> Konfirmasi</button>
         </div>

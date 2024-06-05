@@ -9,7 +9,7 @@ const Step1 = ({ formData, setFormData, nextStep }) => {
   return (
     <div>
         <h3>Pilih Jenis Layanan</h3>
-        <div className='px-4 py-1'>
+        <div className='px-0 px-sm-4 py-1'>
             <div class="px-3 my-3 form-check border rounded d-flex align-items-center justify-content-between">
                 <label class="py-2 form-check-label" for="checkService1">
                     <div className='d-flex align-items-center'>
@@ -50,13 +50,13 @@ const Step1 = ({ formData, setFormData, nextStep }) => {
                 <label class="py-2 form-check-label" for="checkService5">
                     <div className='d-flex align-items-center'>
                         <img src={service5} class="card-img-service-order me-3" alt=""/>
-                        <h5 className='mb-0 fw-bold'>Laundry Perlengkapan Bayi</h5>
+                        <h5 className='mb-0 fw-bold'><span className='d-none d-sm-block'>Laundry </span>Perlengkapan Bayi</h5>
                     </div>
                 </label>
                 <input class="form-check-input" type="checkbox" value="" id="checkService5" />
             </div>
         </div>
-        <div className='w-100 d-flex justify-content-end mt-3 pe-4'>
+        <div className='w-100 d-flex justify-content-end mt-3 pe-sm-4'>
             <button onClick={nextStep} className='btn px-4 rounded btn-primary'>Next</button>
         </div>
     </div>

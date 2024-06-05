@@ -13,11 +13,12 @@ const TrackPage = () => {
                             Order langsung dari rumah lebih mudah dengan memantau progres pesanan anda <br/>
                             Cepat Lengkap dan Akurat.
                         </p>
-                        <div class="mt-5 d-flex justify-content-center">
+                        <div class="input-box mt-5 d-flex flex-sm-nowrap flex-wrap justify-content-center">
                             <input style={{width:'70%'}} class=" form-control form-control-lg" type="text" placeholder="Masukan nomor orderan anda"/>
+                            <small className='ps-2 d-block d-sm-none'>*Masukkan hingga 5 nomor orderan di sini untuk lacak pesanan Anda</small>
                             <NavLink to="/detail-lacak" style={{width:'30%'}} className="ms-3 px-5 py-3 btn btn-primary">Cek Pesanan</NavLink>
                         </div>
-                        <span>*Masukkan hingga 5 nomor orderan di sini untuk lacak pesanan Anda</span>
+                        <span className='d-none d-sm-block'>*Masukkan hingga 5 nomor orderan di sini untuk lacak pesanan Anda</span>
                     </div>
                 </div>
             </div>

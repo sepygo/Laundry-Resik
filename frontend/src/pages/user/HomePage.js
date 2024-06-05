@@ -24,7 +24,7 @@ const HomePage = () => {
       <div className="row">
         <div className="col-12">
           <div className="row">
-            <div className="col-6 d-flex flex-column justify-content-between">
+            <div className="col-12 col-sm-6 d-flex flex-column justify-content-between">
               <div>
                 <h6 className="tw fw-bold">BY LAUNDRY RESIK.COM</h6>
                 <h1 className="tw fw-bold mt-4">Bingung Mencari Tempat Dalam Hal mencuci?</h1>
@@ -35,11 +35,11 @@ const HomePage = () => {
               </div>
               <div>
                 <div className="d-flex">
-                  <a href="order.html" className="py-3 px-5 btn btn-secondary fw-bold">
+                  <a href="order.html" className="btn-hero py-3 px-5 btn btn-secondary fw-bold">
                     <FontAwesomeIcon icon={faShoppingCart} className='me-2'/>
                     Pesan Sekarang
                   </a>
-                  <a href="tracking.html" className="py-3 px-5 ms-4 btn btn-outline-light fw-bold">Hubungi Kami</a>
+                  <a href="tracking.html" className="btn-hero py-3 px-5 ms-4 btn btn-sm-lg btn-outline-light fw-bold">Hubungi Kami</a>
                 </div>
                 <p className="tw fw-light text-light mt-2 mb-0">
                   Telah memproses 1000+ pesanan sejak 2022
@@ -47,7 +47,7 @@ const HomePage = () => {
                 <a className="text-white text-decoration-underline" href="testi.html">Lihat Testimoni</a>
               </div>
             </div>
-            <div className="col-6 d-flex justify-content-center align-items-center">
+            <div className="col-6 d-none d-sm-flex justify-content-center align-items-center">
               {/* <img src={heroImg} alt="" /> */}
               <div style={{aspectRatio:"4/3",borderTop:"10px solid #FFC600",width:'80%'}} className="px-5 py-4 rounded bg-white">
                 <h3 className="w-100 pb-2" style={{borderBottom:"3px solid #FFC600"}}>Cek Pesanan Disini</h3>
@@ -71,10 +71,10 @@ const HomePage = () => {
       <div className="row">
         <div className="col-12">
           <div className="row">
-            <div className="col-6">
-              <img src={home2} alt="" />
+            <div className="col-12 col-sm-6">
+              <img className="img-what" src={home2} alt="" />
             </div>
-            <div className="col-6">
+            <div className="col-12 col-sm-6 p-4 p-sm-0">
               <h2 className="fw-bold">Apa itu Laundry Resik?</h2>
               <p>
                 Laundry Resik merupakan layanan jasa laundry kiloan, satuan, sepatu, tas, baby stroller,
@@ -107,7 +107,7 @@ const HomePage = () => {
               </div>
               <div className="card-body">
                 <h5 className="fw-bold text-center">Laundry Kiloan</h5>
-                <p className="card-text text-center">Jasa laundry baju kiloan di tamora dan sekitarnya, cocok untuk pakaian
+                <p className="d-none d-sm-block card-text text-center">Jasa laundry baju kiloan di tamora dan sekitarnya, cocok untuk pakaian
                   sehari-hari. Sudah termasuk cuci, gosok dan lipat. Bisa antar-jemput</p>
               </div>
             </div>
@@ -117,7 +117,7 @@ const HomePage = () => {
               </div>
               <div className="card-body">
                 <h5 className="fw-bold text-center">Laundry Satuan</h5>
-                <p className="card-text text-center">Jasa laundry baju kiloan di tamora dan sekitarnya, cocok untuk pakaian
+                <p className="d-none d-sm-block card-text text-center">Jasa laundry baju kiloan di tamora dan sekitarnya, cocok untuk pakaian
                   sehari-hari. Sudah termasuk cuci, gosok dan lipat. Bisa antar-jemput</p>
               </div>
             </div>
@@ -127,7 +127,7 @@ const HomePage = () => {
               </div>
               <div className="card-body">
                 <h5 className="fw-bold text-center">Cuci Karpet</h5>
-                <p className="card-text text-center">Jasa laundry baju kiloan di tamora dan sekitarnya, cocok untuk pakaian
+                <p className="d-none d-sm-block card-text text-center">Jasa laundry baju kiloan di tamora dan sekitarnya, cocok untuk pakaian
                   sehari-hari. Sudah termasuk cuci, gosok dan lipat. Bisa antar-jemput</p>
               </div>
             </div>
@@ -137,7 +137,7 @@ const HomePage = () => {
               </div>
               <div className="card-body">
                 <h5 className="fw-bold text-center">Laundry Sepatu</h5>
-                <p className="card-text text-center">Jasa laundry baju kiloan di tamora dan sekitarnya, cocok untuk pakaian
+                <p className="d-none d-sm-block card-text text-center">Jasa laundry baju kiloan di tamora dan sekitarnya, cocok untuk pakaian
                   sehari-hari. Sudah termasuk cuci, gosok dan lipat. Bisa antar-jemput</p>
               </div>
             </div>
@@ -147,7 +147,7 @@ const HomePage = () => {
               </div>
               <div className="card-body">
                 <h5 className="fw-bold text-center">Cuci Perlengkapan Bayi</h5>
-                <p className="card-text text-center">Jasa laundry baju kiloan di tamora dan sekitarnya, cocok untuk pakaian
+                <p className="d-none d-sm-block card-text text-center">Jasa laundry baju kiloan di tamora dan sekitarnya, cocok untuk pakaian
                   sehari-hari. Sudah termasuk cuci, gosok dan lipat. Bisa antar-jemput</p>
               </div>
             </div>
@@ -172,7 +172,7 @@ const HomePage = () => {
               </div>
               <div className="card-name d-flex align-items-center">
                 <img src={testi1} alt="" />
-                <div className="ms-3">
+                <div className="ms-1 ms-sm-3">
                   <h5 className="fw-bold">Madam Indah</h5>
                   <span>Customer
                   </span></div>
@@ -187,7 +187,7 @@ const HomePage = () => {
               </div>
               <div className="card-name d-flex align-items-center">
                 <img src={testi2} alt="" />
-                <div className="ms-3">
+                <div className="ms-1 ms-sm-3">
                   <h5 className="fw-bold">Alya Chintia</h5>
                   <span>Customer
                   </span></div>
@@ -202,7 +202,7 @@ const HomePage = () => {
               </div>
               <div className="card-name d-flex align-items-center">
                 <img src={testi3} alt="" />
-                <div className="ms-3">
+                <div className="ms-1 ms-sm-3">
                   <h5 className="fw-bold">Indah Solya</h5>
                   <span>Customer
                   </span></div>
@@ -217,13 +217,13 @@ const HomePage = () => {
               </div>
               <div className="card-name d-flex align-items-center">
                 <img src={testi4} alt="" />
-                <div className="ms-3">
+                <div className="ms-1 ms-sm-3">
                   <h5 className="fw-bold">Patrio Ras</h5>
                   <span>Customer
                   </span></div>
               </div>
             </div>
-            <div className="card card-testi">
+            <div className="d-none d-sm-flex card card-testi">
               <div className="card-body">
                 <h5 className="card-title text-muted"><FontAwesomeIcon icon={faQuoteRight}/></h5>
                 <p className="card-subtitle m-0 text-muted">
@@ -232,13 +232,13 @@ const HomePage = () => {
               </div>
               <div className="card-name d-flex align-items-center">
                 <img src={testi5} alt="" />
-                <div className="ms-3">
+                <div className="ms-1 ms-sm-3">
                   <h5 className="fw-bold">Chaterina</h5>
                   <span>Customer
                   </span></div>
               </div>
             </div>
-            <div className="card card-testi">
+            <div className="d-none d-sm-flex card card-testi">
               <div className="card-body">
                 <h5 className="card-title text-muted"><FontAwesomeIcon icon={faQuoteRight}/></h5>
                 <p className="card-subtitle m-0 text-muted">
@@ -247,7 +247,7 @@ const HomePage = () => {
               </div>
               <div className="card-name d-flex align-items-center">
                 <img src={testi6} alt="" />
-                <div className="ms-3">
+                <div className="ms-1 ms-sm-3">
                   <h5 className="fw-bold">Sapty Reski</h5>
                   <span>Customer
                   </span></div>

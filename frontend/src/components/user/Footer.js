@@ -6,28 +6,28 @@ const Footer = () => {
     <footer>
         <div className="py-5 container">
         <div className="row">
-            <div className="col-6">
-            <img src={logoOld} alt="" />
-            <p className="mt-4 pr-3 tw">
-                Laundry Resik merupakan layanan jasa laundry kiloan,
-                satuan, sepatu, tas, baby stroller, karpet, dan lainnya. 
-                kami juga telah menyediakan jasa pickup delivery atau 
-                antar jemput terdekat di wilayah tamora dengan melalui 
-                website atau whatsApp customer service.
-            </p>
+            <div className="col-sm-6 mb-5 mb-sm-0">
+                <img src={logoOld} alt="" />
+                <p className="mt-4 pr-3 tw d-none d-sm-block">
+                    Laundry Resik merupakan layanan jasa laundry kiloan,
+                    satuan, sepatu, tas, baby stroller, karpet, dan lainnya. 
+                    kami juga telah menyediakan jasa pickup delivery atau 
+                    antar jemput terdekat di wilayah tamora dengan melalui 
+                    website atau whatsApp customer service.
+                </p>
             </div>
-            <div className="col-3">
-            <h5 className="text-white fw-bold"><b>Link Lainnya</b></h5>
-            <a className='text-decoration-none' href="/layanan">Daftar Harga</a>
-            <a className='text-decoration-none' href="/lacak">Cek Pesanan</a>
-            <a className='text-decoration-none' href="/testimoni">Testimoni</a>
-            <a className='text-decoration-none' href="/hubungi-kami">Hubungi Kami</a>
+            <div className="col-6 col-sm-3">
+                <h5 className="text-white fw-bold"><b>Link Lainnya</b></h5>
+                <a className='text-decoration-none' href="/layanan">Daftar Harga</a>
+                <a className='text-decoration-none' href="/lacak">Cek Pesanan</a>
+                <a className='text-decoration-none' href="/testimoni">Testimoni</a>
+                <a className='text-decoration-none' href="/hubungi-kami">Hubungi Kami</a>
             </div>
-            <div className="col-3">
-            <h5 className="text-white fw-bold"><b>Lokasi Kami</b></h5>
-            <p className="text-white" style={{marginTop: '18px'}}>
-                Jln. Limau Manis Pasar XIV Dusun 7 Gg. Warisan - Deli Serdang, 20362
-            </p>
+            <div className="col-6 col-sm-3">
+                <h5 className="text-white fw-bold"><b>Lokasi Kami</b></h5>
+                <p className="text-white" style={{marginTop: '18px'}}>
+                    Jln. Limau Manis Pasar XIV Dusun 7 Gg. Warisan - Deli Serdang, 20362
+                </p>
             </div>
         </div>
         </div>

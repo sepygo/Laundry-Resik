@@ -79,7 +79,7 @@ const TestiPage = () => {
                                 </span></div>
                             </div>
                             </div>
-                            <div className="card card-testi">
+                            <div className="d-none d-sm-flex card card-testi">
                             <div className="card-body">
                                 <h5 className="card-title text-muted"><FontAwesomeIcon icon={faQuoteRight}/></h5>
                                 <p className="card-subtitle m-0 text-muted">
@@ -94,7 +94,7 @@ const TestiPage = () => {
                                 </span></div>
                             </div>
                             </div>
-                            <div className="card card-testi">
+                            <div className="d-none d-sm-flex card card-testi">
                             <div className="card-body">
                                 <h5 className="card-title text-muted"><FontAwesomeIcon icon={faQuoteRight}/></h5>
                                 <p className="card-subtitle m-0 text-muted">
