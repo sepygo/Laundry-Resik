@@ -6,11 +6,12 @@ import Header from '../components/admin/Header';
 import SideNav from '../components/admin/SideNav';
 import NotFound from '../pages/404';
 
-import TestDashboard from '../pages/admin/TestDashboard';
+// import TestDashboard from '../pages/admin/TestDashboard';
 import ManageUsersPage from '../pages/admin/ManageUsersPage';
 import OrderHistoryPage from '../pages/admin/OrderHistoryPage';
 import TrackingCodePage from '../pages/admin/TrackingCodePage';
 import OrderPage from '../pages/admin/OrderPage';
+import ManageServicePage from '../pages/admin/ManageServicePage';
 
 const AdminRoutes = () => {
     return (
@@ -24,6 +25,7 @@ const AdminRoutes = () => {
                         <Route path="manage-users" element={<ManageUsersPage />} />
                         <Route path="order-history" element={<OrderHistoryPage />} />
                         <Route path="tracking-code" element={<TrackingCodePage />} />
+                        <Route path="manage-service" element={<ManageServicePage />} />
                         <Route path="order" element={<OrderPage />} />
                         <Route path="*" element={<NotFound/>} />
                     </Routes>

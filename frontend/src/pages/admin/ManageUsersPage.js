@@ -1,15 +1,109 @@
-import React, { useState } from 'react';
-import Offcanvas from 'react-bootstrap/Offcanvas';
-import Button from 'react-bootstrap/Button';
-import UserTable from '../../components/admin/UserTable';
-import { Form, FormControl} from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Form, FormControl, Offcanvas ,Button ,Table} from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash, faPen } from '@fortawesome/free-solid-svg-icons';
 
 const ManageUsersPage = () => {
-  
-  // canvas 
+  const [users, setUsers] = useState([]);
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
+  const [editingUser, setEditingUser] = useState(null);
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+    role: '',
+  });
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  const fetchUsers = () => {
+    fetch('http://localhost:3100/api/users')
+      .then(response => response.json())
+      .then(data => setUsers(data))
+      .catch(error => console.error('Error fetching users:', error));
+  };
+
+  const handleClose = () => {
+    setShow(false);
+    setEditingUser(null);
+    setFormData({
+      username: '',
+      email: '',
+      password: '',
+      role: '',
+    });
+  };
+
   const handleShow = () => setShow(true);
+
+  const handleAddUser = () => {
+    fetch('http://localhost:3100/api/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+    .then(response => response.json())
+    .then(newUserData => {
+      setUsers([...users, newUserData]);
+      fetchUsers();
+      handleClose();
+    })
+    .catch(error => console.error('Error adding user:', error));
+  };
+
+  const handleUpdateUser = () => {
+    fetch(`http://localhost:3100/api/users/${editingUser.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formDataWithoutPassword()), // formDataWithoutPassword for update
+    })
+    .then(response => response.json())
+    .then(updatedUserData => {
+      const updatedUsers = users.map(user =>
+        user.id === updatedUserData.id ? updatedUserData : user
+      );
+      setUsers(updatedUsers);
+      fetchUsers();
+      handleClose();
+    })
+    .catch(error => console.error('Error updating user:', error));
+  };
+
+  const handleDelete = (userId) => {
+    fetch(`http://localhost:3100/api/users/${userId}`, {
+      method: 'DELETE',
+    })
+    .then(() => {
+      const updatedUsers = users.filter(user => user.id !== userId);
+      setUsers(updatedUsers);
+    })
+    .catch(error => console.error('Error deleting user:', error));
+  };
+
+  const handleEdit = (user) => {
+    setEditingUser(user);
+    setFormData({
+      username: user.username,
+      email: user.email,
+      role: user.role,
+    });
+    handleShow();
+  };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  const formDataWithoutPassword = () => {
+    const { password, ...dataWithoutPassword } = formData;
+    return dataWithoutPassword;
+  };
 
   return (
     <div className="p-5">
@@ -28,49 +122,79 @@ const ManageUsersPage = () => {
           <label className="ms-2">Entri</label>
         </div>
         <Form className="d-flex ms-auto">
-            <FormControl
-              type="search"
-              placeholder="Cari..."
-              className="me-2"
-              aria-label="Search"
-            />
-          </Form>
+          <FormControl
+            type="search"
+            placeholder="Cari..."
+            className="me-2"
+            aria-label="Search"
+          />
+        </Form>
       </div>
-      <UserTable />
+      
+      <Table bordered hover>
+        <thead>
+          <tr className='text-center'>
+            <th className='bg-primary text-white'>ID</th>
+            <th className='bg-primary text-white'>Nama User</th>
+            <th className='bg-primary text-white'>Email</th>
+            <th className='bg-primary text-white'>Role</th>
+            <th className='bg-primary text-white'>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map(user => (
+            <tr key={user.id}>
+              <td className='text-center'>{user.id}</td>
+              <td>{user.username}</td>
+              <td>{user.email}</td>
+              <td>{user.role}</td>
+              <td className='text-center'>
+                <Button className="btn btn-sm btn-primary me-2" onClick={() => handleEdit(user)}>
+                  <FontAwesomeIcon icon={faPen} className='mx-2'/>
+                </Button>
+                <Button variant="danger" size="sm" onClick={() => handleDelete(user.id)}>
+                  <FontAwesomeIcon icon={faTrash} className='mx-2'/>
+                </Button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
 
       <Offcanvas show={show} onHide={handleClose} placement='end'>
-          <Offcanvas.Header closeButton>
-            <Offcanvas.Title>Tambah Pengguna</Offcanvas.Title>
-          </Offcanvas.Header>
-          <Offcanvas.Body>
-            <form>
-              <div class="mb-3">
-                <label for="selectRole" class="form-label">Role Akses</label>
-                <select class="mb-3 form-select" aria-label="selectRole">
-                  <option selected disabled>Pilih Akses</option>
-                  <option value="1">Admin</option>
-                  <option value="3">Kasir</option>
-                </select>
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>{editingUser ? 'Edit Pengguna' : 'Tambah Pengguna'}</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <form onSubmit={editingUser ? handleUpdateUser : handleAddUser}>
+            <div className="mb-3">
+              <label htmlFor="username" className="form-label">Nama Pengguna</label>
+              <input type="text" className="form-control" id="username" value={formData.username} onChange={handleChange} required />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="email" className="form-label">Email</label>
+              <input type="email" className="form-control" id="email" value={formData.email} onChange={handleChange} required />
+            </div>
+            {!editingUser && (
+              <div className="mb-3">
+                <label htmlFor="password" className="form-label">Password</label>
+                <input type="password" className="form-control" id="password" value={formData.password} onChange={handleChange} required />
               </div>
-              <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Nama Pengguna</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-              </div>
-              <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-                <div id="emailHelp" class="form-text">Email tidak boleh sama dengan yang lain.</div>
-              </div>
-              <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" />
-              </div>
-              <button type='button' class="w-100 btn btn-primary" onClick={handleShow}>+ Tambah</button>
-            </form>
-          </Offcanvas.Body>
-        </Offcanvas>
-
-      
+            )}
+            <div className="mb-3">
+              <label htmlFor="role" className="form-label">Role Akses</label>
+              <select className="form-select" id="role" value={formData.role} onChange={handleChange} required>
+                <option value="" selected disabled>Pilih Akses</option>
+                <option value="admin">Admin</option>
+                <option value="kasir">Kasir</option>
+              </select>
+            </div>
+            <button type="button" className="w-100 btn btn-primary" onClick={editingUser ? handleUpdateUser : handleAddUser}>
+              {editingUser ? 'Simpan Perubahan' : '+ Tambah'}
+            </button>
+          </form>
+        </Offcanvas.Body>
+      </Offcanvas>
     </div>
   );
 };

@@ -122,3 +122,7 @@
 .offcanvas.offcanvas-order{
   height: fit-content;
 }
+
+table td{
+  vertical-align: middle;
+}
