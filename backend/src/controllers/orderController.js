@@ -24,6 +24,19 @@ exports.getOrderById = (req, res) => {
     });
 };
 
+exports.getOrderByTc = (req, res) => {
+    const tc = req.params.tc;
+    Order.getOrderByTc(tc, (err, order) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        if (!order) {
+            return res.status(404).send({ message: 'Order not found' });
+        }
+        res.status(200).json(order);
+    });
+};
+
 // Membuat pesanan baru
 exports.createOrder = (req, res) => {
     const newOrder = req.body;
@@ -44,6 +57,18 @@ exports.updateOrder = (req, res) => {
             return res.status(500).send(err);
         }
         res.status(200).send({ message: 'Order updated successfully' });
+    });
+};
+
+// Memperbarui pesanan
+exports.updateOrderStatus = (req, res) => {
+    const id = req.params.id;
+    const updatedOrder = req.body;
+    Order.updateOrderStatus(id, updatedOrder, (err) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.status(200).send({ message: 'Order updated status successfully' });
     });
 };
 

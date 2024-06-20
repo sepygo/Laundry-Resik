@@ -22,6 +22,17 @@ exports.getOrderItemById = (id, callback) => {
     });
 };
 
+// Mendapatkan item pesanan berdasarkan ID Order
+exports.getOrderItemByOrderId = (id, callback) => {
+    const query = 'SELECT * FROM order_items WHERE order_id = ?';
+    db.query(query, [id], (err, results) => {
+        if (err) {
+            return callback(err, null);
+        }
+        callback(null, results[0]);
+    });
+};
+
 // Membuat item pesanan baru
 exports.createOrderItem = (orderItem, callback) => {
     const query = 'INSERT INTO order_items (order_id, service_id, quantity, price) VALUES (?, ?, ?, ?)';

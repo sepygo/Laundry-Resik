@@ -35,8 +35,8 @@ exports.createUser = (user, callback) => {
 
 // Memperbarui pengguna
 exports.updateUser = (id, user, callback) => {
-    const query = 'UPDATE users SET username = ?, password = ?, email = ?, role = ? WHERE id = ?';
-    db.query(query, [user.username, user.password, user.email, user.role, id], (err, results) => {
+    const query = 'UPDATE users SET username = ?, email = ?, role = ? WHERE id = ?';
+    db.query(query, [user.username, user.email, user.role, id], (err, results) => {
         if (err) {
             return callback(err, null);
         }

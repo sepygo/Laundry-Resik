@@ -24,6 +24,20 @@ exports.getOrderItemById = (req, res) => {
     });
 };
 
+// Mendapatkan item pesanan berdasarkan order ID
+exports.getOrderItemByOrderId = (req, res) => {
+    const id = req.params.id;
+    OrderItem.getOrderItemByOrderId(id, (err, orderItem) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        if (!orderItem) {
+            return res.status(404).send({ message: 'Order item by order ID not found' });
+        }
+        res.status(200).json(orderItem);
+    });
+};
+
 // Membuat item pesanan baru
 exports.createOrderItem = (req, res) => {
     const newOrderItem = req.body;
