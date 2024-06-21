@@ -1,5 +1,5 @@
-import React from "react";
-import { NavLink } from 'react-router-dom';
+import React, { useState }  from "react";
+import { NavLink, useNavigate } from 'react-router-dom';
 import home2 from '../../assets/home2.png'
 import service1 from '../../assets/service/service-1.png'
 import service2 from '../../assets/service/service-2.png'
@@ -17,6 +17,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faQuoteRight} from '@fortawesome/free-solid-svg-icons';
 
 const HomePage = () => {
+
+  const [trackingCode, setTrackingCode] = useState('');
+  const navigate = useNavigate();
+
+  const handleInputChange = (e) => {
+      setTrackingCode(e.target.value);
+  };
+
+  const handleTrackOrder = () => {
+      navigate(`/detail-lacak/${trackingCode}`);
+  };
+
   return (
     <div>
   <section className="hero notch d-flex align-items-center">
@@ -35,11 +47,13 @@ const HomePage = () => {
               </div>
               <div>
                 <div className="d-flex">
-                  <a href="order.html" className="btn-hero py-3 px-5 btn btn-secondary fw-bold">
+                  <NavLink to="/pemesanan" className="btn-hero py-3 px-5 btn btn-secondary fw-bold">
                     <FontAwesomeIcon icon={faShoppingCart} className='me-2'/>
                     Pesan Sekarang
-                  </a>
-                  <a href="tracking.html" className="btn-hero py-3 px-5 ms-4 btn btn-sm-lg btn-outline-light fw-bold">Hubungi Kami</a>
+                  </NavLink>
+                  <NavLink to="/hubungi-kami" className="btn-hero py-3 px-5 ms-4 btn btn-sm-lg btn-outline-light fw-bold">
+                    Hubungi Kami
+                  </NavLink>
                 </div>
                 <p className="tw fw-light text-light mt-2 mb-0">
                   Telah memproses 1000+ pesanan sejak 2022
@@ -48,12 +62,14 @@ const HomePage = () => {
               </div>
             </div>
             <div className="col-6 d-none d-sm-flex justify-content-center align-items-center">
-              {/* <img src={heroImg} alt="" /> */}
               <div style={{aspectRatio:"4/3",borderTop:"10px solid #FFC600",width:'80%'}} className="px-5 py-4 rounded bg-white">
                 <h3 className="w-100 pb-2" style={{borderBottom:"3px solid #FFC600"}}>Cek Pesanan Disini</h3>
-                <input type="text" className="mt-5 mb-4 px-0 form-control rounded-0 shadow-none" style={{borderBottom:"3px dashed lightgray", borderLeft:"0",borderRight:"0",borderTop:"0"}} id="codeTrack" placeholder="Masukan kode pesanan anda"/>
-                {/* <button className="py-3 px-5 btn btn-warning fw-bold">Cek Disini</button> */}
-                <NavLink to="/detail-lacak" className="py-3 px-5 btn btn-warning fw-bold">Cek Disini </NavLink>
+                <input type="text" className="mt-5 mb-4 px-0 form-control rounded-0 shadow-none" style={{borderBottom:"3px dashed lightgray", borderLeft:"0",borderRight:"0",borderTop:"0"}} id="codeTrack" 
+                  value={trackingCode}
+                  onChange={handleInputChange}
+                  placeholder="Masukan kode pesanan anda"
+                />
+                <button  onClick={handleTrackOrder} className="py-3 px-5 btn btn-warning fw-bold">Cek Disini </button>
                 <p className="text-secondary fw-lightlight mt-3 mb-0" style={{fontSize:"14px"}}>
                   Tidak menemukan kode pesanan? <br/>
                   <NavLink to="/hubungi-kami" className="text-primary text-decoration-none fw-bold">Hubungi Kami </NavLink>
@@ -84,7 +100,11 @@ const HomePage = () => {
                 Bagi Anda yang sedang mencari jasa laundry antar jemput terdekat, bisa langsung menghubungi
                 kontak customer service Laundry Resik sekarang juga.
               </p>
-              <button className="py-3 px-5 btn btn-warning fw-bold">Hubungi kami</button>
+              {/* <button className="py-3 px-5 btn btn-warning fw-bold">Hubungi kami</button> */}
+              
+              <NavLink to="/hubungi-kami" className="py-3 px-5 btn btn-warning fw-bold">
+                    Hubungi Kami
+              </NavLink>
             </div>
           </div>
         </div>

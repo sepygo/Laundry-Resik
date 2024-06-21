@@ -7,7 +7,7 @@ import HeaderNav from '../components/user/HeaderNav';
 import Footer from '../components/user/Footer';
 import NotFound from '../pages/404';
 
-import TestUser from '../pages/user/TestUser';
+// import TestUser from '../pages/user/TestUser';
 import HomePage from '../pages/user/HomePage';
 import ServicePage from '../pages/user/ServicePage';
 import OrderPage from '../pages/user/OrderPage';
@@ -33,7 +33,7 @@ const UserRoutes = () => {
                 <Route path="testimoni" element={<TestiPage />} />
                 <Route path="lacak" element={<TrackPage />} />
                 <Route path="hubungi-kami" element={<ContactPage />} />
-                <Route path="detail-lacak" element={<TrackResultPage />} />
+                <Route path="detail-lacak/:tc" element={<TrackResultPage />} />
                 <Route path="login" element={<LoginPage />} />
                 <Route path="*" element={<NotFound/>} />
             </Routes>

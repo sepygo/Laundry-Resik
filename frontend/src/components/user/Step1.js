@@ -6,59 +6,53 @@ import service4 from '../../assets/service/service-4.png';
 import service5 from '../../assets/service/service-5.png';
 
 const Step1 = ({ formData, setFormData, nextStep }) => {
+  const handleChange = (e) => {
+    const { value, checked } = e.target;
+    const { services } = formData;
+
+    if (checked) {
+      setFormData({
+        ...formData,
+        services: [...services, value],
+      });
+    } else {
+      setFormData({
+        ...formData,
+        services: services.filter((service) => service !== value),
+      });
+    }
+  };
+
   return (
     <div>
-        <h3>Pilih Jenis Layanan</h3>
-        <div className='px-0 px-sm-4 py-1'>
-            <div class="px-3 my-3 form-check border rounded d-flex align-items-center justify-content-between">
-                <label class="py-2 form-check-label" for="checkService1">
-                    <div className='d-flex align-items-center'>
-                        <img src={service1} class="card-img-service-order me-3" alt=""/>
-                        <h5 className='mb-0 fw-bold'>Laundry Kiloan</h5>
-                    </div>
-                </label>
-                <input class="form-check-input" type="checkbox" value="" id="checkService1" />
+      <h3>Pilih Jenis Layanan</h3>
+      <div className='px-0 px-sm-4 py-1'>
+        {[{ id: 1, name: 'Laundry Kiloan', image: service1 },
+          { id: 2, name: 'Laundry Satuan', image: service2 },
+          { id: 3, name: 'Cuci Karpet', image: service3 },
+          { id: 4, name: 'Laundry Sepatu', image: service4 },
+          { id: 5, name: 'Laundry Perlengkapan Bayi', image: service5 }].map(service => (
+            <div key={service.id} className="px-3 my-3 form-check border rounded d-flex align-items-center justify-content-between">
+              <label className="py-2 form-check-label" htmlFor={`checkService${service.id}`}>
+                <div className='d-flex align-items-center'>
+                  <img src={service.image} className="card-img-service-order me-3" alt="" />
+                  <h5 className='mb-0 fw-bold'>{service.name}</h5>
+                </div>
+              </label>
+              <input
+                className="form-check-input"
+                type="checkbox"
+                value={service.name}
+                id={`checkService${service.id}`}
+                checked={formData.services.includes(service.name)}
+                onChange={handleChange}
+              />
             </div>
-            <div class="px-3 my-3 form-check border rounded d-flex align-items-center justify-content-between">
-                <label class="py-2 form-check-label" for="checkService2">
-                    <div className='d-flex align-items-center'>
-                        <img src={service2} class="card-img-service-order me-3" alt=""/>
-                        <h5 className='mb-0 fw-bold'>Laundry Satuan</h5>
-                    </div>
-                </label>
-                <input class="form-check-input" type="checkbox" value="" id="checkService2" />
-            </div>
-            <div class="px-3 my-3 form-check border rounded d-flex align-items-center justify-content-between">
-                <label class="py-2 form-check-label" for="checkService3">
-                    <div className='d-flex align-items-center'>
-                        <img src={service3} class="card-img-service-order me-3" alt=""/>
-                        <h5 className='mb-0 fw-bold'>Cuci Karpet</h5>
-                    </div>
-                </label>
-                <input class="form-check-input" type="checkbox" value="" id="checkService3" />
-            </div>
-            <div class="px-3 my-3 form-check border rounded d-flex align-items-center justify-content-between">
-                <label class="py-2 form-check-label" for="checkService4">
-                    <div className='d-flex align-items-center'>
-                        <img src={service4} class="card-img-service-order me-3" alt=""/>
-                        <h5 className='mb-0 fw-bold'>Laundry Sepatu</h5>
-                    </div>
-                </label>
-                <input class="form-check-input" type="checkbox" value="" id="checkService4" />
-            </div>
-            <div class="px-3 my-3 form-check border rounded d-flex align-items-center justify-content-between">
-                <label class="py-2 form-check-label" for="checkService5">
-                    <div className='d-flex align-items-center'>
-                        <img src={service5} class="card-img-service-order me-3" alt=""/>
-                        <h5 className='mb-0 fw-bold'><span className='d-none d-sm-block'>Laundry </span>Perlengkapan Bayi</h5>
-                    </div>
-                </label>
-                <input class="form-check-input" type="checkbox" value="" id="checkService5" />
-            </div>
-        </div>
-        <div className='w-100 d-flex justify-content-end mt-3 pe-sm-4'>
-            <button onClick={nextStep} className='btn px-4 rounded btn-primary'>Next</button>
-        </div>
+          ))}
+      </div>
+      <div className='w-100 d-flex justify-content-end mt-3 pe-sm-4'>
+        <button onClick={nextStep} className='btn px-4 rounded btn-primary'>Next</button>
+      </div>
     </div>
   );
 };
