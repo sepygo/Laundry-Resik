@@ -1,4 +1,5 @@
 const db = require('../db');
+const bcrypt = require('bcrypt');
 
 // Mendapatkan semua pengguna
 exports.getAllUsers = (callback) => {
