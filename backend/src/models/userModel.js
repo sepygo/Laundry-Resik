@@ -23,9 +23,10 @@ exports.getUserById = (id, callback) => {
 };
 
 // Membuat pengguna baru
-exports.createUser = (user, callback) => {
+exports.createUser = async (user, callback) => {
+    const hashedPassword = await bcrypt.hash(user.password, 10);
     const query = 'INSERT INTO users (username, password, email, role) VALUES (?, ?, ?, ?)';
-    db.query(query, [user.username, user.password, user.email, user.role], (err, results) => {
+    db.query(query, [user.username, hashedPassword, user.email, user.role], (err, results) => {
         if (err) {
             return callback(err, null);
         }
