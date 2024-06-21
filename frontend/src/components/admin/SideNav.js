@@ -4,7 +4,7 @@ import avatar from '../../assets/avatar.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser, faListCheck, faArrowRightFromBracket, faCashRegister, faTShirt, faClockRotateLeft } from '@fortawesome/free-solid-svg-icons';
 
-const SideNav = () => {
+const SideNav = ({ token, onLogout }) => {
   return (
     <div className="bg-white sidenav-con py-3">
       <div className="mb-4 d-flex align-items-center">
@@ -34,9 +34,9 @@ const SideNav = () => {
         <NavLink to="/admin/manage-users" className={({ isActive }) => isActive ? 'nav-link active bg-primary text-white' : 'nav-link'}>
           <FontAwesomeIcon icon={faCircleUser} className='me-3' style={{width:"25px",fontSize:"20px"}}/>Pengguna
         </NavLink>
-        <NavLink to="/login" className="nav-link">
+        <button className="nav-link text-start" onClick={onLogout}>
           <FontAwesomeIcon icon={faArrowRightFromBracket} className='me-3' style={{width:"25px",fontSize:"20px"}}/>Keluar
-        </NavLink>
+        </button>
       </nav>
     </div>
   );
