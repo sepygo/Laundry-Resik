@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 import { Form, FormControl, Table, Button, Offcanvas } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
@@ -15,12 +16,22 @@ const OrderHistoryPage = () => {
   const [selectedOrderId, setSelectedOrderId] = useState(null);
   const [show, setShow] = useState(false);
   const [filteredOrders, setFilteredOrders] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   const fetchOrders = async () => {
     try {
       const response = await axios.get('http://localhost:3100/api/orders');
-      setOrders(response.data);
-      filterOrders(response.data);
+      const sortedOrders = response.data.sort((a, b) => {
+        const parseDate = (dateStr) => {
+          const [day, month, year] = dateStr.split('-');
+          return new Date(`${year}-${month}-${day}`);
+        };
+        return parseDate(b.order_date) - parseDate(a.order_date);
+      });
+      setOrders(sortedOrders);
+      filterOrders(sortedOrders);
     } catch (error) {
       console.error('Error fetching orders:', error);
     }
@@ -50,8 +61,19 @@ const OrderHistoryPage = () => {
     fetchServices();
   }, []);
 
+  useEffect(() => {
+    filterOrders(orders);
+  }, [searchTerm, orders]);
+
   const filterOrders = (allOrders) => {
-    const filtered = allOrders.filter(order => order.status === 'Selesai');
+    const filtered = allOrders.filter(order => 
+      order.status === 'Selesai' && 
+      (
+        order.tracking_code.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        order.customer_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        order.address.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    );
     setFilteredOrders(filtered);
   };
 
@@ -61,29 +83,39 @@ const OrderHistoryPage = () => {
     setShow(true);
   };
 
+  const handleSearch = (event) => {
+    paginate(1);
+    setSearchTerm(event.target.value);
+  };
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredOrders.slice(indexOfFirstItem, indexOfLastItem);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   const selectedOrderItems = orderDetails.filter(item => item.order_id === selectedOrderId);
 
   return (
-    <div className="p-5">
-      <div className="d-flex justify-content-between align-items-center mb-5">
-        <h2 className="mb-0">Kelola Kode Tracking</h2>
+    <div className="px-5 pt-5 pb-0">
+      <div className="d-flex justify-content-between align-items-center mb-3">
+        <h2 className="mb-0">Riwayat Pesanan</h2>
       </div>
-      <div className="d-flex justify-content-between align-items-center mb-4">
-        <div>
-          <label>Tampilkan </label>
-          <select className="form-select d-inline w-auto ms-2" aria-label="Entries">
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="15">15</option>
-          </select>
-          <label className="ms-2">Entri</label>
-        </div>
+      <div className="d-flex justify-content-between align-items-stretch mb-3">
+        <nav aria-label="breadcrumb" className='bc-admin bg-white rounded px-2 border d-flex justify-content-between align-items-center'>
+          <ol className="breadcrumb mb-0">
+            <li className="breadcrumb-item"><NavLink to="/admin/dashboard">Dashboard</NavLink></li>
+            <li className="breadcrumb-item active" aria-current="page">Riwayat</li>
+          </ol>
+        </nav>
         <Form className="d-flex ms-auto">
           <FormControl
             type="search"
             placeholder="Cari..."
             className="me-2"
             aria-label="Search"
+            value={searchTerm}
+            onChange={handleSearch}
           />
         </Form>
       </div>
@@ -99,10 +131,10 @@ const OrderHistoryPage = () => {
           </tr>
         </thead>
         <tbody>
-          {filteredOrders.map(order => (
+          {currentItems.map(order => (
             <tr key={order.id}>
               <td className='text-center'>{order.tracking_code}</td>
-              <td className='text-center' style={{minWidth:'100px'}}>{order.order_date}</td>
+              <td style={{minWidth:'100px'}}>{order.order_date}</td>
               <td>{order.customer_name}</td>
               <td>{order.address}</td>
               <td className={(order.status === 'Verifikasi' ? 'text-danger' :
@@ -112,7 +144,7 @@ const OrderHistoryPage = () => {
                             )+' fw-bold text-center'} style={{Width:'137px'}}>
                 {order.status}              
               </td>
-              <td className='text-center' style={{Width:'129px'}}>
+              <td className='text-center' style={{minWidth:'129px'}}>
                 <Button variant="primary" size="sm" className="me-2" onClick={() => handleShow(order.id)}>
                   <FontAwesomeIcon icon={faCircleInfo} className='mx-2' />
                 </Button>
@@ -124,21 +156,24 @@ const OrderHistoryPage = () => {
       <nav aria-label="Page navigation example">
         <ul className="pagination">
           <li className="page-item">
-            <a className="page-link" href="#" aria-label="Previous">
+            <a className="page-link" href="#" aria-label="Previous" onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>
               <span aria-hidden="true">&laquo;</span>
             </a>
           </li>
-          <li className="page-item active"><a className="page-link" href="#">1</a></li>
-          <li className="page-item"><a className="page-link" href="#">2</a></li>
-          <li className="page-item"><a className="page-link" href="#">3</a></li>
+          {[...Array(Math.ceil(filteredOrders.length / itemsPerPage)).keys()].map(number => (
+            <li key={number + 1} className={`page-item ${currentPage === number + 1 ? 'active' : ''}`}>
+              <a onClick={() => paginate(number + 1)} className="page-link" href="#">
+                {number + 1}
+              </a>
+            </li>
+          ))}
           <li className="page-item">
-            <a className="page-link" href="#" aria-label="Next">
+            <a className="page-link" href="#" aria-label="Next" onClick={() => paginate(currentPage + 1)} disabled={currentPage === Math.ceil(filteredOrders.length / itemsPerPage)}>
               <span aria-hidden="true">&raquo;</span>
             </a>
           </li>
         </ul>
       </nav>
-
 
       <Offcanvas show={show} onHide={handleClose} placement='end' style={{width:'30vw'}}>
         <Offcanvas.Header closeButton>
@@ -227,7 +262,6 @@ const OrderHistoryPage = () => {
           </table>
         </Offcanvas.Body>
       </Offcanvas>
-
     </div>
   );
 };

@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
+import swal from 'sweetalert';
 import { Form, FormControl, Table, Button, Offcanvas } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
@@ -15,12 +17,22 @@ const TrackingCodePage = () => {
   const [selectedOrderId, setSelectedOrderId] = useState(null);
   const [show, setShow] = useState(false);
   const [filteredOrders, setFilteredOrders] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   const fetchOrders = async () => {
     try {
       const response = await axios.get('http://localhost:3100/api/orders');
-      setOrders(response.data);
-      filterOrders(response.data);
+      const sortedOrders = response.data.sort((a, b) => {
+        const parseDate = (dateStr) => {
+          const [day, month, year] = dateStr.split('-');
+          return new Date(`${year}-${month}-${day}`);
+        };
+        return parseDate(b.order_date) - parseDate(a.order_date);
+      });
+      setOrders(sortedOrders);
+      filterOrders(sortedOrders);
     } catch (error) {
       console.error('Error fetching orders:', error);
     }
@@ -50,8 +62,19 @@ const TrackingCodePage = () => {
     fetchServices();
   }, []);
 
+  useEffect(() => {
+    filterOrders(orders);
+  }, [searchTerm, orders]);
+
   const filterOrders = (allOrders) => {
-    const filtered = allOrders.filter(order => order.status !== 'Selesai');
+    const filtered = allOrders.filter(order => 
+      order.status !== 'Selesai' && 
+      (
+        order.tracking_code.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        order.customer_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        order.address.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    );
     setFilteredOrders(filtered);
   };
 
@@ -61,47 +84,79 @@ const TrackingCodePage = () => {
     setShow(true);
   };
 
-  const handleDeleteOrder = async (orderId) => {
-    try {
-      await axios.delete(`http://localhost:3100/api/orders/${orderId}`);
-      setOrders(orders.filter(order => order.id !== orderId));
-    } catch (error) {
-      console.error('Error deleting order:', error);
-    }
+  const handleDeleteOrder = (orderId) => {
+    swal({
+      title: "Yakin Dihapus?",
+      text: "setelah dihapus, pesanan tidak bisa dikembalikan!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        axios.delete(`http://localhost:3100/api/orders/${orderId}`)
+          .then(() => {
+            setOrders(orders.filter(order => order.id !== orderId));
+            fetchOrders();
+            swal("Yahh! Pesanan berhasil dihapus!", {
+              icon: "success",
+            });
+          })
+          .catch(error => {
+            console.error('Error deleting order:', error);
+            swal("Oops! Something went wrong. Please try again later.", {
+              icon: "error",
+            });
+          });
+      } else {
+        swal("Penghapusan dibatalkan!");
+      }
+    });
   };
+  
 
   const handleStatusChange = async (orderId, newStatus) => {
     try {
       await axios.put(`http://localhost:3100/api/orders/status/${orderId}`, { status: newStatus });
       setOrders(orders.map(order => order.id === orderId ? { ...order, status: newStatus } : order));
+      fetchOrders();
     } catch (error) {
       console.error('Error updating order status:', error);
     }
   };
 
+  const handleSearch = (event) => {
+    paginate(1);
+    setSearchTerm(event.target.value);
+  };
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredOrders.slice(indexOfFirstItem, indexOfLastItem);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   const selectedOrderItems = orderDetails.filter(item => item.order_id === selectedOrderId);
 
   return (
-    <div className="p-5">
-      <div className="d-flex justify-content-between align-items-center mb-5">
-        <h2 className="mb-0">Kelola Kode Tracking</h2>
+    <div className="px-5 pt-5 pb-0">
+      <div className="d-flex justify-content-between align-items-center mb-3">
+        <h2 className="mb-0">Kelola Pesanan</h2>
       </div>
-      <div className="d-flex justify-content-between align-items-center mb-4">
-        <div>
-          <label>Tampilkan </label>
-          <select className="form-select d-inline w-auto ms-2" aria-label="Entries">
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="15">15</option>
-          </select>
-          <label className="ms-2">Entri</label>
-        </div>
+      <div className="d-flex justify-content-between align-items-stretch mb-3">
+        <nav aria-label="breadcrumb" className='bc-admin bg-white rounded px-2 border d-flex justify-content-between align-items-center'>
+          <ol className="breadcrumb mb-0">
+            <li className="breadcrumb-item"><NavLink to="/admin/dashboard">Dashboard</NavLink></li>
+            <li className="breadcrumb-item active" aria-current="page">Pesanan</li>
+          </ol>
+        </nav>
         <Form className="d-flex ms-auto">
           <FormControl
             type="search"
             placeholder="Cari..."
             className="me-2"
             aria-label="Search"
+            value={searchTerm}
+            onChange={handleSearch}
           />
         </Form>
       </div>
@@ -117,28 +172,32 @@ const TrackingCodePage = () => {
           </tr>
         </thead>
         <tbody>
-          {filteredOrders.map(order => (
+          {currentItems.map(order => (
             <tr key={order.id}>
               <td className='text-center'>{order.tracking_code}</td>
               <td style={{minWidth:'100px'}}>{order.order_date}</td>
               <td>{order.customer_name}</td>
               <td>{order.address}</td>
-              <td style={{minWidth:'137px'}}>
-                <Form.Select
-                  value={order.status}
-                  onChange={(e) => handleStatusChange(order.id, e.target.value)}
-                  className={order.status === 'Verifikasi' ? 'text-danger' :
-                              order.status === 'Proses' ? 'text-warning' :
-                              order.status === 'Siap Ambil' ? 'text-primary' :
-                              order.status === 'Selesai' ? 'text-success' : ''
-                            }
-                >
-                  <option className='text-danger' value="Verifikasi">Verifikasi</option>
-                  <option className='text-warning' value="Proses">Proses</option>
-                  <option className='text-primary' value="Siap Ambil">Siap Ambil</option>
-                  <option className='text-success' value="Selesai">Selesai</option>
-                </Form.Select>
-              </td>
+              {order.status === 'Verifikasi' ? 
+                <td className='text-danger text-center'>{order.status}</td>
+                :
+                <td style={{minWidth:'137px'}}>
+                  <Form.Select
+                    value={order.status}
+                    onChange={(e) => handleStatusChange(order.id, e.target.value)}
+                    className={order.status === 'Verifikasi' ? 'text-danger' :
+                                order.status === 'Proses' ? 'text-warning' :
+                                order.status === 'Siap Ambil' ? 'text-primary' :
+                                order.status === 'Selesai' ? 'text-success' : ''
+                              }
+                  >
+                    <option className='text-danger' value="Verifikasi">Verifikasi</option>
+                    <option className='text-warning' value="Proses">Proses</option>
+                    <option className='text-primary' value="Siap Ambil">Siap Ambil</option>
+                    <option className='text-success' value="Selesai">Selesai</option>
+                  </Form.Select>
+                </td>
+              }
               <td className='text-center' style={{minWidth:'129px'}}>
                 <Button variant="primary" size="sm" className="me-2" onClick={() => handleShow(order.id)}>
                   <FontAwesomeIcon icon={faCircleInfo} className='mx-2' />
@@ -154,21 +213,24 @@ const TrackingCodePage = () => {
       <nav aria-label="Page navigation example">
         <ul className="pagination">
           <li className="page-item">
-            <a className="page-link" href="#" aria-label="Previous">
+            <a className="page-link" href="#" aria-label="Previous" onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>
               <span aria-hidden="true">&laquo;</span>
             </a>
           </li>
-          <li className="page-item active"><a className="page-link" href="#">1</a></li>
-          <li className="page-item"><a className="page-link" href="#">2</a></li>
-          <li className="page-item"><a className="page-link" href="#">3</a></li>
+          {[...Array(Math.ceil(filteredOrders.length / itemsPerPage)).keys()].map(number => (
+            <li key={number + 1} className={`page-item ${currentPage === number + 1 ? 'active' : ''}`}>
+              <a onClick={() => paginate(number + 1)} className="page-link" href="#">
+                {number + 1}
+              </a>
+            </li>
+          ))}
           <li className="page-item">
-            <a className="page-link" href="#" aria-label="Next">
+            <a className="page-link" href="#" aria-label="Next" onClick={() => paginate(currentPage + 1)} disabled={currentPage === Math.ceil(filteredOrders.length / itemsPerPage)}>
               <span aria-hidden="true">&raquo;</span>
             </a>
           </li>
         </ul>
       </nav>
-
 
       <Offcanvas show={show} onHide={handleClose} placement='end' style={{width:'30vw'}}>
         <Offcanvas.Header closeButton>
@@ -257,7 +319,6 @@ const TrackingCodePage = () => {
           </table>
         </Offcanvas.Body>
       </Offcanvas>
-
     </div>
   );
 };

@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import avatar from '../../assets/avatar.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleUser, faListCheck, faArrowRightFromBracket, faCashRegister, faTShirt, faClockRotateLeft } from '@fortawesome/free-solid-svg-icons';
+import { faCircleUser, faListCheck, faArrowRightFromBracket, faCashRegister, faTShirt, faClockRotateLeft, faTableColumns } from '@fortawesome/free-solid-svg-icons';
 
 const SideNav = ({ token, onLogout }) => {
   return (
@@ -15,12 +15,15 @@ const SideNav = ({ token, onLogout }) => {
         </div>
       </div>
       <nav className="nav flex-column">
-      <NavLink to="/admin/order" className={({ isActive }) => isActive ? 'nav-link active bg-primary text-white' : 'nav-link'}>
+        <NavLink to="/admin/dashboard" className={({ isActive }) => isActive ? 'nav-link active bg-primary text-white' : 'nav-link'}>
+          <FontAwesomeIcon icon={faTableColumns} className='me-3' style={{width:"25px",fontSize:"20px"}}/>Dashboard
+        </NavLink>
+        <NavLink to="/admin/order" className={({ isActive }) => isActive ? 'nav-link active bg-primary text-white' : 'nav-link'}>
           <FontAwesomeIcon icon={faCashRegister} className='me-3' style={{width:"25px",fontSize:"20px"}}/>Kasir
         </NavLink>
 
         <NavLink to="/admin/tracking-code" className={({ isActive }) => isActive ? 'nav-link active bg-primary text-white' : 'nav-link'}>
-          <FontAwesomeIcon icon={faListCheck} className='me-3' style={{width:"25px",fontSize:"20px"}}/>Tracking
+          <FontAwesomeIcon icon={faListCheck} className='me-3' style={{width:"25px",fontSize:"20px"}}/>Pesanan
         </NavLink>
 
         <NavLink to="/admin/manage-service" className={({ isActive }) => isActive ? 'nav-link active bg-primary text-white' : 'nav-link'}>

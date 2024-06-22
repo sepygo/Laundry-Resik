@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
+import swal from 'sweetalert';
+import axios from 'axios';
 import { Form, FormControl, Offcanvas ,Button ,Table} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPen } from '@fortawesome/free-solid-svg-icons';
@@ -76,14 +79,32 @@ const ManageUsersPage = () => {
   };
 
   const handleDelete = (userId) => {
-    fetch(`http://localhost:3100/api/users/${userId}`, {
-      method: 'DELETE',
-    })
-    .then(() => {
-      const updatedUsers = users.filter(user => user.id !== userId);
-      setUsers(updatedUsers);
-    })
-    .catch(error => console.error('Error deleting user:', error));
+    swal({
+      title: "Yakin Dihapus?",
+      text: "setelah dihapus, pengguna tidak bisa mengakses!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        axios.delete(`http://localhost:3100/api/users/${userId}`)
+          .then(() => {
+            const updatedUsers = users.filter(user => user.id !== userId);
+            setUsers(updatedUsers);
+            swal("Yahh! pengguna telah dihapus!", {
+              icon: "success",
+            });
+          })
+          .catch(error => {
+            console.error('Error deleting order:', error);
+            swal("Oops! Something went wrong. Please try again later.", {
+              icon: "error",
+            });
+          });
+      } else {
+        swal("Penghapusan dibatalkan!");
+      }
+    });
   };
 
   const handleEdit = (user) => {
@@ -106,21 +127,18 @@ const ManageUsersPage = () => {
   };
 
   return (
-    <div className="p-5">
+    <div className="px-5 pt-5 pb-0">
       <div className="d-flex justify-content-between align-items-center mb-5">
         <h2 className="mb-0">Kelola Akses Pengguna</h2>
         <Button className="btn btn-lg btn-primary py-3 px-4" onClick={handleShow}>+ Tambah Akses</Button>
       </div>
-      <div className="d-flex justify-content-between align-items-center mb-4">
-        <div>
-          <label>Tampilkan </label>
-          <select className="form-select d-inline w-auto ms-2" aria-label="Entries">
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="15">15</option>
-          </select>
-          <label className="ms-2">Entri</label>
-        </div>
+      <div className="d-flex justify-content-between align-items-stretch mb-3">
+        <nav aria-label="breadcrumb" className='bc-admin bg-white rounded px-2 border d-flex justify-content-between align-items-center'>
+          <ol className="breadcrumb mb-0">
+            <li className="breadcrumb-item"><NavLink to="/admin/dashboard">Dashboard</NavLink></li>
+            <li className="breadcrumb-item active" aria-current="page">Pengguna</li>
+          </ol>
+        </nav>
         <Form className="d-flex ms-auto">
           <FormControl
             type="search"

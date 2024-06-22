@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Form, FormControl, Table, Button, Col, Nav, Row, Tab } from 'react-bootstrap';
-import Modal from 'react-bootstrap/Modal';
+import { NavLink } from 'react-router-dom';
+import { Form, FormControl, Table, Button, Col, Nav, Row, Tab, Modal } from 'react-bootstrap';
+import swal from 'sweetalert';
 import axios from 'axios';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -62,21 +63,57 @@ const TrackingCodePage = () => {
   };
 
   const handleDeleteCategory = async (categoryId) => {
-    try {
-      await axios.delete(`http://localhost:3100/api/categories/${categoryId}`);
-      fetchCategories();
-    } catch (error) {
-      console.error("There was an error deleting the category!", error);
-    }
+    swal({
+      title: "Yakin Dihapus?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        axios.delete(`http://localhost:3100/api/categories/${categoryId}`)
+          .then(() => {
+            fetchCategories();
+            swal("Yahh! kategori telah dihapus!", {
+              icon: "success",
+            });
+          })
+          .catch(error => {
+            console.error('Error deleting order:', error);
+            swal("Oops! Something went wrong. Please try again later.", {
+              icon: "error",
+            });
+          });
+      } else {
+        swal("Penghapusan dibatalkan!");
+      }
+    });
   };
 
   const handleDeleteService = async (serviceId) => {
-    try {
-      await axios.delete(`http://localhost:3100/api/services/${serviceId}`);
-      fetchServices();
-    } catch (error) {
-      console.error("There was an error deleting the service!", error);
-    }
+    swal({
+      title: "Yakin Dihapus?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        axios.delete(`http://localhost:3100/api/services/${serviceId}`)
+          .then(() => {
+            fetchServices();
+            swal("Yahh! layanan telah dihapus!", {
+              icon: "success",
+            });
+          })
+          .catch(error => {
+            console.error('Error deleting order:', error);
+            swal("Oops! Something went wrong. Please try again later.", {
+              icon: "error",
+            });
+          });
+      } else {
+        swal("Penghapusan dibatalkan!");
+      }
+    });
   };
 
   const handleServiceFormSubmit = async (event) => {
@@ -129,17 +166,14 @@ const TrackingCodePage = () => {
       <div className="d-flex justify-content-between align-items-center mb-5">
         <h2 className="mb-0">Kelola Layanan</h2>
       </div>
-      <div className="d-flex justify-content-between align-items-center mb-4">
-        <div>
-          <label>Tampilkan </label>
-          <select className="form-select d-inline w-auto ms-2" aria-label="Entries">
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="15">15</option>
-          </select>
-          <label className="ms-2">Entri</label>
-        </div>
-        <Form className="d-flex ms-auto">
+      <div className="d-flex justify-content-between align-items-stretch mb-3">
+        <nav aria-label="breadcrumb" className='bc-admin bg-white rounded px-2 border d-flex justify-content-between align-items-center'>
+          <ol className="breadcrumb mb-0">
+            <li className="breadcrumb-item"><NavLink to="/admin/dashboard">Dashboard</NavLink></li>
+            <li className="breadcrumb-item active" aria-current="page">Layanan</li>
+          </ol>
+        </nav>
+        <Form className="d-flex ms-auto" style={{opacity:'0'}}>
           <FormControl
             type="search"
             placeholder="Cari..."
