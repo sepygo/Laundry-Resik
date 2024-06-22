@@ -70,9 +70,15 @@ const TrackResultPage = () => {
   const sendMessage = () => {
     const waNumber = '6282133987199';
     const message = `
-HALOO!!! saya mau menanyakan pesanan saya
+    🔍BUTUH BANTUAN🔎
+    
+Halo Admin 👋,
+    
+Saya ingin menanyakan status pesanan saya dengan kode tracking: *${tc}*.
 
-Kode Pemesanan : ${tc}
+Mohon informasinya mengenai status pesanan tersebut.
+
+Terima kasih 🙏
     `;
     const waUrl = `https://api.whatsapp.com/send?phone=${waNumber}&text=${encodeURIComponent(message)}`;
     window.open(waUrl, '_blank');
@@ -81,7 +87,15 @@ Kode Pemesanan : ${tc}
   const helpMessage = () => {
     const waNumber = '6282133987199';
     const message = `
-HALOO!!! saya tidak dapat menemukan pesanan saya
+    ‼️KODE TRACKING TIDAK DITEMUKAN‼️
+
+Halo Admin 👋,
+    
+Saya ingin menanyakan tentang kode tracking *${tc}* yang *Tidak Ditemukan*.
+
+Mohon bantuannya untuk mengecek dan memberikan informasi lebih lanjut.
+
+Terima kasih 🙏
     `;
     const waUrl = `https://api.whatsapp.com/send?phone=${waNumber}&text=${encodeURIComponent(message)}`;
     window.open(waUrl, '_blank');
