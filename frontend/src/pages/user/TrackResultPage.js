@@ -145,7 +145,7 @@ Terima kasih 🙏
                     <div className={`step-item ${statusNow > 3 ? 'completed' : ''}`}>
                         <i className='step-icon bi-check2-circle'></i>
                     </div>
-                    <h5 className='ms-5 mb-0' style={{position:'absolute'}}>gatau</h5>
+                    <h5 className='ms-5 mb-0' style={{position:'absolute'}}>Selesai</h5>
                 </div>
               </div>
             </div>
