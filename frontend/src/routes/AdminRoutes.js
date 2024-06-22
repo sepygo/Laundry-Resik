@@ -7,6 +7,7 @@ import SideNav from '../components/admin/SideNav';
 import NotFound from '../pages/404';
 
 // import TestDashboard from '../pages/admin/TestDashboard';
+import DashboardPage from '../pages/admin/DashboardPage';
 import ManageUsersPage from '../pages/admin/ManageUsersPage';
 import OrderHistoryPage from '../pages/admin/OrderHistoryPage';
 import TrackingCodePage from '../pages/admin/TrackingCodePage';
@@ -36,7 +37,8 @@ const AdminRoutes = () => {
                     <SideNav onLogout={handleLogout} />
                     <div className="bg-light flex-grow-1 admin-content-con">
                         <Routes>
-                            <Route path="/" element={<Navigate to="order" replace />} />
+                            <Route path="/" element={<Navigate to="dashboard" replace />} />
+                            <Route path="dashboard" element={<DashboardPage />} />
                             <Route path="manage-users" element={<ManageUsersPage />} />
                             <Route path="order-history" element={<OrderHistoryPage />} />
                             <Route path="tracking-code" element={<TrackingCodePage />} />

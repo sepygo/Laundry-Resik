@@ -36,6 +36,7 @@
 
 .admin-content-con, .main-layout-con{
   height: calc(100vh - 86px);
+  overflow: auto;
 }
 
 .order-page-con{
@@ -125,4 +126,12 @@
 
 table td{
   vertical-align: middle;
+}
+
+.bc-admin {
+  --bs-breadcrumb-divider: '>';
+}
+
+.bc-admin a{
+  text-decoration: none;
 }
