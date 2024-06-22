@@ -48,6 +48,17 @@ exports.createOrder = (req, res) => {
     });
 };
 
+// Membuat pesanan WA
+exports.createOrderWA = (req, res) => {
+    const newOrder = req.body;
+    Order.createOrderWA(newOrder, (err, order) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.status(201).json(order);
+    });
+};
+
 // Memperbarui pesanan
 exports.updateOrder = (req, res) => {
     const id = req.params.id;

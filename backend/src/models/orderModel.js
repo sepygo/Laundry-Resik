@@ -69,6 +69,26 @@ exports.createOrder = (order, callback) => {
     });
 };
 
+// Membuat pesanan WA
+exports.createOrderWA = (order, callback) => {
+    const today = new Date();
+    const year = today.getFullYear().toString().padStart(4, '0');
+    const month = (today.getMonth() + 1).toString().padStart(2, '0');
+    const day = today.getDate().toString().padStart(2, '0');
+
+    const query = 'INSERT INTO orders (order_date, status, total_price, customer_name, telp, address, notes) VALUES (?, ?, ?, ?, ?, ?, ?)';
+    db.query(query, [order.order_date, order.status, 0, order.customer_name, order.telp, order.address, order.notes], (err, results) => {
+        if (err) {
+            return callback(err, null);
+        }
+        const orderId = results.insertId;
+        const trackCode = `LDR${month}${day}${orderId}${year.slice(2)}`;
+        const setTrackingCode = 'UPDATE orders SET tracking_code = ? WHERE id = ?';
+
+        db.query(setTrackingCode, [trackCode, orderId]);
+    });
+};
+
 // Memperbarui pesanan
 exports.updateOrder = (id, order, callback) => {
     const query = 'UPDATE orders SET order_date = ?, status = ?, total_price = ?, customer_name = ?, telp = ?, address = ?, notes = ? WHERE id = ?';
