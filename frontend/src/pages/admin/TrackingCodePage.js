@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { API_URL } from '../../utils/constants';
 import { NavLink } from 'react-router-dom';
 import swal from 'sweetalert';
 import { Form, FormControl, Table, Button, Offcanvas } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
 
 function formatRupiah(number) {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -23,7 +24,7 @@ const TrackingCodePage = () => {
 
   const fetchOrders = async () => {
     try {
-      const response = await axios.get('http://localhost:3100/api/orders');
+      const response = await axios.get(`${API_URL}/api/orders`);
       const sortedOrders = response.data.sort((a, b) => {
         const parseDate = (dateStr) => {
           const [day, month, year] = dateStr.split('-');
@@ -40,7 +41,7 @@ const TrackingCodePage = () => {
 
   const fetchOrderItems = async () => {
     try {
-      const response = await axios.get('http://localhost:3100/api/order-items');
+      const response = await axios.get(`${API_URL}/api/order-items`);
       setOrderDetails(response.data);
     } catch (error) {
       console.error('Error fetching order items:', error);
@@ -49,7 +50,7 @@ const TrackingCodePage = () => {
 
   const fetchServices = async () => {
     try {
-      const response = await axios.get('http://localhost:3100/api/services');
+      const response = await axios.get(`${API_URL}/api/services`);
       setServices(response.data);
     } catch (error) {
       console.error('Error fetching services:', error);
@@ -93,7 +94,7 @@ const TrackingCodePage = () => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        axios.delete(`http://localhost:3100/api/orders/${orderId}`)
+        axios.delete(`${API_URL}/api/orders/${orderId}`)
           .then(() => {
             setOrders(orders.filter(order => order.id !== orderId));
             fetchOrders();
@@ -116,7 +117,7 @@ const TrackingCodePage = () => {
 
   const handleStatusChange = async (orderId, newStatus) => {
     try {
-      await axios.put(`http://localhost:3100/api/orders/status/${orderId}`, { status: newStatus });
+      await axios.put(`${API_URL}/api/orders/status/${orderId}`, { status: newStatus });
       setOrders(orders.map(order => order.id === orderId ? { ...order, status: newStatus } : order));
       fetchOrders();
     } catch (error) {

@@ -4,14 +4,14 @@ import avatar from '../../assets/avatar.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser, faListCheck, faArrowRightFromBracket, faCashRegister, faTShirt, faClockRotateLeft, faTableColumns } from '@fortawesome/free-solid-svg-icons';
 
-const SideNav = ({ token, onLogout }) => {
+const SideNav = ({ user, onLogout }) => {
   return (
     <div className="bg-white sidenav-con py-3">
       <div className="mb-4 d-flex align-items-center">
         <img src={avatar} alt="Admin" className="rounded-circle avatar-admin"/>
         <div style={{width: "calc(100% - 100px)"}}>
-          <h5 className="text-truncate" style={{width:"100%"}}>Giselle</h5>
-          <small>Admin</small>
+          <h5 className="text-truncate" style={{width:"100%"}}>{user.username}</h5>
+          <small>{user.role}</small>
         </div>
       </div>
       <nav className="nav flex-column">

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { API_URL } from '../../utils/constants';
 import { Line, Doughnut } from 'react-chartjs-2';
 import 'chart.js/auto';
 
@@ -16,7 +17,7 @@ const DashboardPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3100/api/orders');
+        const response = await axios.get(`${API_URL}/api/orders`);
         const orders = response.data;
         
         // pendapatan bulanan

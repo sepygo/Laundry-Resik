@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import '../styles/admin/style.css';
 
@@ -17,15 +17,34 @@ import LoginPage from '../pages/admin/Login';
 
 const AdminRoutes = () => {
     const [token, setToken] = useState(localStorage.getItem('token'));
-  
-    const handleLogin = (token) => {
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+        }
+        setLoading(false);
+    }, []);
+
+    const handleLogin = (token, user) => {
       setToken(token);
+      setUser(user);
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(user));
     };
 
     const handleLogout = () => {
       localStorage.removeItem('token');
+      localStorage.removeItem('user');
       setToken(null);
+      setUser(null);
     };
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div className="d-flex flex-column h-100">
@@ -34,7 +53,7 @@ const AdminRoutes = () => {
                 <LoginPage onLogin={handleLogin} />
             ) : (
                 <div className="d-flex flex-grow-1 main-layout-con">
-                    <SideNav onLogout={handleLogout} />
+                    <SideNav user={user} onLogout={handleLogout} />
                     <div className="bg-light flex-grow-1 admin-content-con">
                         <Routes>
                             <Route path="/" element={<Navigate to="dashboard" replace />} />

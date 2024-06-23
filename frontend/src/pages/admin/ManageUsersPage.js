@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { API_URL } from '../../utils/constants';
 import { NavLink } from 'react-router-dom';
 import swal from 'sweetalert';
-import axios from 'axios';
 import { Form, FormControl, Offcanvas ,Button ,Table} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPen } from '@fortawesome/free-solid-svg-icons';
@@ -22,7 +23,7 @@ const ManageUsersPage = () => {
   }, []);
 
   const fetchUsers = () => {
-    fetch('http://localhost:3100/api/users')
+    fetch(`${API_URL}/api/users`)
       .then(response => response.json())
       .then(data => setUsers(data))
       .catch(error => console.error('Error fetching users:', error));
@@ -42,7 +43,7 @@ const ManageUsersPage = () => {
   const handleShow = () => setShow(true);
 
   const handleAddUser = () => {
-    fetch('http://localhost:3100/api/users', {
+    fetch(`${API_URL}/api/users`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -59,7 +60,7 @@ const ManageUsersPage = () => {
   };
 
   const handleUpdateUser = () => {
-    fetch(`http://localhost:3100/api/users/${editingUser.id}`, {
+    fetch(`${API_URL}/api/users/${editingUser.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -87,7 +88,7 @@ const ManageUsersPage = () => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        axios.delete(`http://localhost:3100/api/users/${userId}`)
+        axios.delete(`${API_URL}/api/users/${userId}`)
           .then(() => {
             const updatedUsers = users.filter(user => user.id !== userId);
             setUsers(updatedUsers);

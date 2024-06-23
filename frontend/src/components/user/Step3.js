@@ -1,4 +1,7 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { API_URL } from '../../utils/constants';
+import swal from 'sweetalert';
 
 import service1 from '../../assets/service/service-1.png';
 import service2 from '../../assets/service/service-2.png';
@@ -7,6 +10,8 @@ import service4 from '../../assets/service/service-4.png';
 import service5 from '../../assets/service/service-5.png';
 
 const Step3 = ({ formData, prevStep }) => {
+
+    const navigate = useNavigate();
 
     const serviceImages = {
         'Laundry Kiloan': service1,
@@ -48,7 +53,7 @@ Laundry Resik 🧺
         };
         
         try {
-            const response = await fetch('http://localhost:3100/api/orders/byWA', {
+            const response = await fetch(`${API_URL}/api/orders/byWA`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -60,10 +65,36 @@ Laundry Resik 🧺
                 throw new Error('Gagal membuat pesanan');
             }
 
-            
+            const result = await response.json();
+            const trackCode = result.trackCode;
+
+            swal({
+                title: "Pesanan Anda telah dikonfirmasi!",
+                text: `Kode Tracking: ${trackCode}`,
+                icon: "success",
+                button: "OK",
+            }).then(() => {
+                navigate(`/detail-lacak/${trackCode}`);
+            });
+
         } catch (error) {
             console.error('Error:', error);
+            swal("Gagal mengkonfirmasi pesanan", "Terjadi kesalahan, silakan coba lagi.", "error");
         }
+    };
+
+    const confirmOrder = () => {
+        swal({
+            title: "Konfirmasi Pesanan",
+            text: "Apakah Anda yakin ingin mengkonfirmasi pesanan ini?",
+            icon: "warning",
+            buttons: true,
+        })
+        .then((willSend) => {
+            if (willSend) {
+                sendMessage();
+            }
+        });
     };
 
     return (
@@ -100,7 +131,7 @@ Laundry Resik 🧺
             </form>
             <div className='w-100 d-flex justify-content-end mt-3 pe-sm-4'>
                 <button onClick={prevStep} className='btn px-4 me-3 rounded btn-warning'>Back</button>
-                <button onClick={sendMessage} className='btn px-4 rounded btn-success'><i className="bi-whatsapp"></i> Konfirmasi</button>
+                <button onClick={confirmOrder} className='btn px-4 rounded btn-success'><i className="bi-whatsapp"></i> Konfirmasi</button>
             </div>
         </div>
     );

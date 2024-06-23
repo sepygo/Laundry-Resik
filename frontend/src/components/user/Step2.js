@@ -1,12 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Step2 = ({ formData, setFormData, nextStep, prevStep }) => {
+  const [errors, setErrors] = useState({});
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
       [name]: value,
     });
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.name) newErrors.name = 'Nama Lengkap diperlukan';
+    if (!formData.phone) newErrors.phone = 'Nomor WA diperlukan';
+    if (!formData.address) newErrors.address = 'Alamat Lengkap diperlukan';
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleNext = () => {
+    if (validateForm()) {
+      nextStep();
+    }
   };
 
   return (
@@ -24,6 +41,8 @@ const Step2 = ({ formData, setFormData, nextStep, prevStep }) => {
             onChange={handleChange}
             placeholder='Masukan Nama Anda'
           />
+          {/* {errors.name && <p className="text-danger">{errors.name}</p>} */}
+          <small className='text-danger' style={{ opacity: errors.phone ? '1' : '0' }}>Nama tidak boleh kosong</small>
         </div>
         <div className="col-md-6">
           <label htmlFor="telpOrder" className="form-label">Nomor WA <i className="bi-whatsapp"></i></label>
@@ -36,6 +55,8 @@ const Step2 = ({ formData, setFormData, nextStep, prevStep }) => {
             onChange={handleChange}
             placeholder='Masukan Nomor Whastapp Anda'
           />
+          {/* {errors.phone && <p className="text-danger">{errors.phone}</p>} */}
+          <small className='text-danger' style={{ opacity: errors.phone ? '1' : '0' }}>Nomor WA tidak boleh kosong</small>
         </div>
         <div className="col-md-6">
           <label htmlFor="addressOrder" className="form-label">Alamat Lengkap</label>
@@ -48,6 +69,8 @@ const Step2 = ({ formData, setFormData, nextStep, prevStep }) => {
             onChange={handleChange}
             placeholder='Masukan Alamat Lengkap Anda'
           ></textarea>
+          {/* {errors.address && <p className="text-danger">{errors.address}</p>} */}
+          <small className='text-danger' style={{ opacity: errors.address ? '1' : '0' }}>Alamat tidak boleh kosong</small>
         </div>
         <div className="col-md-6">
           <label htmlFor="notesOrder" className="form-label">Catatan</label>
@@ -64,7 +87,7 @@ const Step2 = ({ formData, setFormData, nextStep, prevStep }) => {
       </form>
       <div className='w-100 d-flex justify-content-end mt-3 pe-sm-4'>
         <button onClick={prevStep} className='btn px-4 me-3 rounded btn-warning'>Back</button>
-        <button onClick={nextStep} className='btn px-4 rounded btn-primary'>Next</button>
+        <button onClick={handleNext} className='btn px-4 rounded btn-primary'>Next</button>
       </div>
     </div>
   );

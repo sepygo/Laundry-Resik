@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_URL } from '../../utils/constants';
 import { Row } from 'react-bootstrap';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Button from 'react-bootstrap/Button';
@@ -25,7 +26,7 @@ const OrderPage = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('http://localhost:3100/api/categories');
+        const response = await axios.get(`${API_URL}/api/categories`);
         setCategories(response.data);
         setActiveCategory(response.data[0].name);
       } catch (error) {
@@ -35,7 +36,7 @@ const OrderPage = () => {
 
     const fetchServices = async () => {
       try {
-        const response = await axios.get('http://localhost:3100/api/services');
+        const response = await axios.get(`${API_URL}/api/services`);
         setServices(response.data);
       } catch (error) {
         console.error('Error fetching services:', error);
@@ -49,7 +50,7 @@ const OrderPage = () => {
   useEffect(() => {
     const fetchCustomers = async () => {
       try {
-        const response = await axios.get('http://localhost:3100/api/orders');
+        const response = await axios.get(`${API_URL}/api/orders`);
         const verifiedCustomers = response.data.filter(customer => customer.status === 'Verifikasi');
         setCustomers(verifiedCustomers);
       } catch (error) {
@@ -135,12 +136,12 @@ const OrderPage = () => {
     try {
       if (isCustomerSelected && selectedCustomerId) {
         // Delete existing order before creating a new one
-        await axios.delete(`http://localhost:3100/api/orders/${selectedCustomerId}`);
+        await axios.delete(`${API_URL}/api/orders/${selectedCustomerId}`);
         console.log('Order deleted successfully');
       }
 
       // Create a new order
-      const response = await axios.post('http://localhost:3100/api/orders', order);
+      const response = await axios.post(`${API_URL}/api/orders`, order);
       console.log('Order created successfully:', response.data);
       resetQuantities();
       handleClose();

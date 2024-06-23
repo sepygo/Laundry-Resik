@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { API_URL } from '../../utils/constants';
+import { useParams } from 'react-router-dom';
+
 const TrackResultPage = () => {
 
   const { tc } = useParams(); // Mendapatkan tracking code dari parameter URL
@@ -11,7 +13,7 @@ const TrackResultPage = () => {
 
   const fetchOrder = async () => {
     try {
-      const response = await axios.get(`http://localhost:3100/api/orders/tracking/${tc}`);
+      const response = await axios.get(`${API_URL}/api/orders/tracking/${tc}`);
       setOrder(response.data);
     } catch (error) {
       console.error('Error fetching order:', error);
@@ -22,7 +24,7 @@ const TrackResultPage = () => {
 
   const fetchOrderItems = async () => {
     try {
-      const response = await axios.get('http://localhost:3100/api/order-items');
+      const response = await axios.get(`${API_URL}/api/order-items`);
       setOrderDetails(response.data);
     } catch (error) {
       console.error('Error fetching order items:', error);
@@ -31,7 +33,7 @@ const TrackResultPage = () => {
 
   const fetchServices = async () => {
     try {
-      const response = await axios.get('http://localhost:3100/api/services');
+      const response = await axios.get(`${API_URL}/api/services`);
       setServices(response.data);
     } catch (error) {
       console.error('Error fetching services:', error);
@@ -183,43 +185,49 @@ Terima kasih 🙏
                     <tr>
                       <td>Layanan</td>
                       <td>
-                        {selectedOrderItems.map(item => {
-                          const service = services.find(s => s.id === item.service_id);
-                          return (
-                            // <div>
-                            //   {service.quantity} {service.unit} - {service.name}
-                            // </div>
-                            <div key={item.id} className='pe-2 mb-1 border rounded d-flex justify-content-between align-items-center' style={{overflow:'hidden', minWidth:'360px'}}>
-                              <div className='d-flex justify-content-center align-items-center'>
-                                <div className='me-2 bg-light d-flex justify-content-center align-items-center' style={{aspectRatio:'1/1',height:'56px'}}>
-                                  <h6 className='m-0' style={{fontSize:'0.9em'}}>{service?.name}</h6>
+                        {selectedOrderItems.length === 0 ? (
+                            <h5 className="m-0 text-warning text-end">Dalam Proses Verifikasi</h5>
+                        ) : (
+                          selectedOrderItems.map(item => {
+                            const service = services.find(s => s.id === item.service_id);
+                            return (
+                              <div key={item.id} className='pe-2 mb-1 border rounded d-flex justify-content-between align-items-center' style={{overflow:'hidden', minWidth:'360px'}}>
+                                <div className='d-flex justify-content-center align-items-center'>
+                                  <div className='me-2 bg-light d-flex justify-content-center align-items-center' style={{aspectRatio:'1/1',height:'56px'}}>
+                                    <h6 className='m-0' style={{fontSize:'0.9em'}}>{service?.name}</h6>
+                                  </div>
+                                  <div>
+                                    <h5 className="mb-1" style={{fontSize:'16px'}}>{service?.description}</h5>
+                                    <h5 className='m-0' style={{fontSize:'14px'}}>
+                                      <span style={{fontSize:'10px'}}>Rp</span>.{formatRupiah(parseInt(service?.price))} x {item.quantity}
+                                      {service?.unit === 'm2' ? (
+                                        <span>m<sup>2</sup></span>
+                                      ) : (
+                                        service?.unit
+                                      )}
+                                    </h5>
+                                  </div>
                                 </div>
                                 <div>
-                                  <h5 className="mb-1" style={{fontSize:'16px'}}>{service?.description}</h5>
-                                  <h5 className='m-0' style={{fontSize:'14px'}}>
-                                    <span style={{fontSize:'10px'}}>Rp</span>.{formatRupiah(parseInt(service?.price))} x {item.quantity}
-                                    {service?.unit === 'm2' ? (
-                                      <span>m<sup>2</sup></span>
-                                    ) : (
-                                      service?.unit
-                                    )}
-                                  </h5>
+                                  <h5 className='m-0'><span style={{fontSize:'14px'}}>Rp</span>{formatRupiah(parseInt(item.price))}</h5>
                                 </div>
                               </div>
-                              <div>
-                                <h5 className='m-0'><span style={{fontSize:'14px'}}>Rp</span>{formatRupiah(parseInt(item.price))}</h5>
-                              </div>
-                            </div>
-                          );
-                        })}
+                            );
+                          })
+                        )}
                       </td>
+
                     </tr>
                     <tr>
                         <td className='fw-bold' >Total Biaya</td>
                         <td className='fw-bold text-end'>
-                          <h5 className='m-0'>
-                            <span style={{fontSize:'14px'}}>Rp</span>.{formatRupiah(parseInt(order.total_price))}
-                          </h5>
+                          {selectedOrderItems.length === 0 ? (
+                              <h5 className="m-0 text-warning">Dalam Proses Verifikasi</h5>
+                          ) : ( 
+                              <h5 className='m-0'>
+                                <span style={{fontSize:'14px'}}>Rp</span>.{formatRupiah(parseInt(order.total_price))}
+                              </h5>
+                          )}
                         </td>
                     </tr>
                   </tbody>

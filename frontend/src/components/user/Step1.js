@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import service1 from '../../assets/service/service-1.png';
 import service2 from '../../assets/service/service-2.png';
 import service3 from '../../assets/service/service-3.png';
@@ -6,6 +6,8 @@ import service4 from '../../assets/service/service-4.png';
 import service5 from '../../assets/service/service-5.png';
 
 const Step1 = ({ formData, setFormData, nextStep }) => {
+  const [error, setError] = useState('');
+
   const handleChange = (e) => {
     const { value, checked } = e.target;
     const { services } = formData;
@@ -20,6 +22,15 @@ const Step1 = ({ formData, setFormData, nextStep }) => {
         ...formData,
         services: services.filter((service) => service !== value),
       });
+    }
+  };
+
+  const handleNext = () => {
+    if (formData.services.length === 0) {
+      setError('Silahkan pilih Layanan yang akan anda pesan.');
+    } else {
+      setError('');
+      nextStep();
     }
   };
 
@@ -50,8 +61,10 @@ const Step1 = ({ formData, setFormData, nextStep }) => {
             </div>
           ))}
       </div>
-      <div className='w-100 d-flex justify-content-end mt-3 pe-sm-4'>
-        <button onClick={nextStep} className='btn px-4 rounded btn-primary'>Next</button>
+      {/* {error ? <h5 className="text-danger mb-0">{error}</h5> : <h5 className="mb-0">  </h5>} */}
+      <div className='w-100 d-flex justify-content-between mt-3 pe-sm-4'>
+        <h5 className="text-danger mb-0" style={{ opacity: error ? '1' : '0' }}>Silahkan pilih Layanan yang akan anda pesan.</h5>
+        <button onClick={handleNext} className='btn px-4 rounded btn-primary'>Next</button>
       </div>
     </div>
   );
