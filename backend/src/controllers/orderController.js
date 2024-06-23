@@ -51,11 +51,11 @@ exports.createOrder = (req, res) => {
 // Membuat pesanan WA
 exports.createOrderWA = (req, res) => {
     const newOrder = req.body;
-    Order.createOrderWA(newOrder, (err, order) => {
+    Order.createOrderWA(newOrder, (err, result) => {
         if (err) {
             return res.status(500).send(err);
         }
-        res.status(201).json(order);
+        res.status(201).json(result);
     });
 };
 

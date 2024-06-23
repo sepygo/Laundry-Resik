@@ -85,7 +85,12 @@ exports.createOrderWA = (order, callback) => {
         const trackCode = `LDR${month}${day}${orderId}${year.slice(2)}`;
         const setTrackingCode = 'UPDATE orders SET tracking_code = ? WHERE id = ?';
 
-        db.query(setTrackingCode, [trackCode, orderId]);
+        db.query(setTrackingCode, [trackCode, orderId], (err, results) => {
+            if (err) {
+                return callback(err, null);
+            }
+            return callback(null, { trackCode });
+        });
     });
 };
 
