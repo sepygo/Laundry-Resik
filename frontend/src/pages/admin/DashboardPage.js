@@ -14,6 +14,13 @@ const DashboardPage = () => {
       ongoingOrderStatusData: { verification: 0, process: 0, readyToPick: 0 },
     });
 
+    const currentMonth = new Date().getMonth() + 1; // Mendapatkan indeks bulan saat ini (0 untuk Januari, 1 untuk Februari, dst.)
+    const monthNames = [
+      'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+      'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+    ];
+    const labelsChart = monthNames.slice(0, currentMonth);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -21,7 +28,6 @@ const DashboardPage = () => {
         const orders = response.data;
         
         // pendapatan bulanan
-        const currentMonth = new Date().getMonth() + 1;
         const currentYear = new Date().getFullYear();
 
         const monthlyIncome = orders
@@ -74,9 +80,7 @@ const DashboardPage = () => {
   }, []);
 
   const lineChartData = {
-    labels: [
-      'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni'
-    ],
+    labels: labelsChart ,
     datasets: [
       {
         label: 'Pendapatan Bulanan',

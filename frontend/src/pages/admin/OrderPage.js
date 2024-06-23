@@ -71,7 +71,15 @@ const OrderPage = () => {
     });
   };
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    setSelectedCustomer({
+      username: '',
+      email: '',
+      password: '',
+      role: '',
+    });
+  };
   const handleShow = () => setShow(true);
 
   const getCategoryIcon = (categoryName) => {
